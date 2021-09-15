@@ -1,6 +1,6 @@
 create database shop;
 use shop;
-#用户模块 usr
+-- 用户模块 usr
 create table usr_customer(
     id bigint primary key AUTO_INCREMENT,
     phone char(11) comment "手机号，同时也是登录账户",
@@ -42,8 +42,8 @@ create table usr_member_level(
     level_label varchar(32) comment "会员级别标题",
     need_score int comment "达到该等级所需积分"
 ) ENGINE=InnoDB comment "会员等级表";
-
-#订单模块 bil
+-- 用户模块 end
+-- 订单模块 bil
 create table bil_bill_list(
 	id bigint primary key AUTO_INCREMENT,
     customer_id bigint comment "下单用户",
@@ -72,8 +72,20 @@ create table bil_bill_item(
 
 create table bil_cart_item(
 	id bigint primary key AUTO_INCREMENT,
-    usr_id bigint comment "用户id",
+    usr_id bigint comment "用户id ",
     product_id bigint comment "商品id",
     product_price decimal(10,2) comment "商品价格",
     product_number int(4) comment "商品数量"
-) ENGINE=InnoDB comment "购物车表"
+) ENGINE=InnoDB comment "购物车表";
+-- 订单模块 end
+-- 商品模块 com
+create table com_brand(
+    id bigint primary key AUTO_INCREMENT,
+    brand_code varchar(127) comment "品牌编号",
+    brand_name varchar(127) comment "品牌名"
+) ENGIN=InnoDB comment "品牌表";
+create table com_
+create table com_commodity(
+    id bigint primary key AUTO_INCREMENT,
+
+)
