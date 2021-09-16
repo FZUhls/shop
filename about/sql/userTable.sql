@@ -78,14 +78,29 @@ create table bil_cart_item(
     product_number int(4) comment "商品数量"
 ) ENGINE=InnoDB comment "购物车表";
 -- 订单模块 end
+
 -- 商品模块 com
 create table com_brand(
     id bigint primary key AUTO_INCREMENT,
     brand_code varchar(127) comment "品牌编号",
     brand_name varchar(127) comment "品牌名"
 ) ENGINE=InnoDB comment "品牌表";
-create table com_
-create table com_commodity(
-    id bigint primary key AUTO_INCREMENT,
 
-)
+create table com_category(
+    id bigint primary key AUTO_INCREMENT,
+    parant_id bigint comment "分类的父级类目",
+    name varchar(127) comment "分类名",
+    product_count int comment "商品数量",
+
+) ENGINE=InnoDB comment "分类表";
+
+create table com_param_group(
+    id bigint primary key AUTO_INCREMENT,
+    category
+)ENGINE=InnoDB comment "商品参数组"
+create table com_commodity_spu(
+    id bigint primary key AUTO_INCREMENT,
+    name varchar(127) comment "商品名",
+    brand_id bigint comment "品牌名",
+
+) ENGINE=InnoDB comment "SPU（商品）表"
