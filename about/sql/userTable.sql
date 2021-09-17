@@ -1,5 +1,4 @@
-drop database if exists shop;
-create database shop;
+
 use shop;
 -- 用户模块 usr
 create table usr_customer(
@@ -57,7 +56,7 @@ create table bil_bill_list(
     pick_up_store_id bigint comment "自提门店id",
 	transport_id datetime comment "订单物流单号",
     receive_addr_id bigint comment "收获地址id",
-    usr_node varchar(255) comment "用户备注",
+    customer_node varchar(255) comment "用户备注",
     node varchar(255) comment "商户备注",
     total_row_amount decimal(10,2) comment "订单原总金额",
     coupon_amount decimal(10,2) comment "优惠卷抵扣",
@@ -68,6 +67,23 @@ create table bil_bill_list(
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单表";
+
+create table bil_return(
+	id bigint primary key AUTO_INCREMENT,
+    bill_id bigint comment "原单号",
+    return_amount decimal(10,2) comment "金额",
+    return_status tinyint(1) comment "退货单状态 0-待处理 1-待退货 2-已完成 3-已拒绝",
+    cre_time datetime comment "创建时间",
+    upd_time datetime comment "修改时间"
+) ENGINE=InnoDB charset=utf8 comment "退货表";
+
+create table bil_return_history(
+	id bigint primary key AUTO_INCREMENT,
+    return_id bigint comment "退货单id",
+    oper_role_code tinyint comment "操作着 0-用户 1-商家 2-系统",
+    change_status tinyint(1) comment "变化状态 0-待处理 1-待退货 2-已完成 3-已拒绝",
+    cre_time datetime comment "创建时间"
+) ENGINE=InnoDB charset=utf8 comment "退货变化记录表";
 
 create table bil_bill_item(
 	id bigint primary key AUTO_INCREMENT,
