@@ -84,8 +84,11 @@
         <module>base-common</module>
         <module>bill-center</module>
         <module>commodity-center</module>
+        <module>commodity-center-api</module>
         <module>customer-center</module>
+        <module>customer-center-api</module>
         <module>marketing-center</module>
+        <module>marketing-center-api</module>
         <module>shop-business</module>
         <module>shop-mall</module>
     </modules>
