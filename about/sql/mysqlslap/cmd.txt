@@ -1,0 +1,1 @@
+mysqlslap -c 100 --create-schema shop -q 'SELECT * FROM street,area,city where street.area_code = area.area_code and area.city_code = city.city_code and city.province_code = 350000; select * from province;' -e innodb --number-of-queries 100 -uroot -p
