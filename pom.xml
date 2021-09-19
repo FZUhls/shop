@@ -19,6 +19,7 @@
         <spring-native.version>0.10.3</spring-native.version>
         <mybatis.version>2.2.0</mybatis.version>
         <mybatis-plus.version>3.4.3.3</mybatis-plus.version>
+        <repackage.classifier/>
     </properties>
     <dependencies>
         <dependency>
