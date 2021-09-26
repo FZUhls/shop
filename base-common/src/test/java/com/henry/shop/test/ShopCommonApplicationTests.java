@@ -1,4 +1,4 @@
-package com.henry.shop.shop.base.common;
+package com.henry.shop.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +8,7 @@ class ShopCommonApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
