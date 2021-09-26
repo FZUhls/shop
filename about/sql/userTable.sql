@@ -162,7 +162,7 @@ create table com_commodity(
     id bigint primary key AUTO_INCREMENT,
     name varchar(127) comment "商品名",
     category_id bigint comment "类别id",
-    variant_id bigint comment "规格组id",
+    variant_group_id bigint comment "规格组id",
     brand_id bigint comment "品牌名",
 	image_url varchar(255) comment "商品图片url",
     publish_status tinyint(1) comment "上架状态：0->下架；1->上架",

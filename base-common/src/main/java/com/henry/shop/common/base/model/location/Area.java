@@ -1,5 +1,6 @@
 package com.henry.shop.common.base.model.location;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  * 行政区实体类---区
  */
 @Data
+@TableName("area")
 public class Area {
     private Long id;
     private String areaCode;
