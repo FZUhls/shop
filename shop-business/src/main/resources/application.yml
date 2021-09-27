@@ -9,3 +9,13 @@ mybatis-plus:
   configuration:
     auto-mapping-behavior: partial #只对非嵌套的 resultMap 进行自动映射
     map-underscore-to-camel-case: true #开启自动驼峰命名规则映射
+
+swagger:
+  title: shop-business
+  description: 商家端接口文档
+  version: 1.0.0
+  basePackage: com.henry.shop.business
+  contact:
+    name: henry
+    url: https://baidu.com
+    email: 314433307@qq.com

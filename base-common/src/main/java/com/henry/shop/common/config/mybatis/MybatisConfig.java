@@ -1,4 +1,4 @@
-package com.henry.shop.common.mybatis;
+package com.henry.shop.common.config.mybatis;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;

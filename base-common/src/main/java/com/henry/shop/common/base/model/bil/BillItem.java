@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.model.bil;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("bil_bill_item")
+@ApiModel
 public class BillItem {
     private Long id;
     /**
