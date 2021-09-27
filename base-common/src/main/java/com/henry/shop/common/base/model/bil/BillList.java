@@ -1,6 +1,9 @@
 package com.henry.shop.common.base.model.bil;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.ReceiveType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,20 +14,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Log
 @TableName("bil_bill_list")
+@ApiModel("订单")
 public class BillList {
     private Long id;
     /**
-     * 客户ID
+     * 顾客ID
      */
+    @ApiModelProperty("顾客id")
     private Long customerId;
     /**
      * 收货方式
      */
-    private Byte receiveType;
+    private ReceiveType receiveType;
     /**
      * 发货仓库id
      */

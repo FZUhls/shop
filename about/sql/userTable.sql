@@ -88,9 +88,9 @@ create table bil_return_history(
 create table bil_bill_item(
 	id bigint primary key AUTO_INCREMENT,
     bill_id bigint comment "订单id",
-    product_id bigint comment "商品id",
-    product_price decimal(10,2) comment "商品价格",
-    product_number int(4) comment "商品数量",
+    sku_id bigint comment "商品id",
+    sku_price decimal(10,2) comment "商品价格",
+    number int(4) comment "商品数量",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单明细表";
