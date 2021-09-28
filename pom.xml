@@ -20,6 +20,7 @@
         <mybatis-boot.version>2.2.0</mybatis-boot.version>
         <mybatis-plus.version>3.4.3.3</mybatis-plus.version>
         <springfox.version>3.0.0</springfox.version>
+        <knife4j.version>3.0.0</knife4j.version>
         <repackage.classifier/>
     </properties>
     <dependencies>
