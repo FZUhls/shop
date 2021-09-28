@@ -1,13 +1,13 @@
-package com.henry.shop.customer.center;
+package com.henry.shop.bill;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommodityCenterApplication {
+public class BillCenterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CommodityCenterApplication.class, args);
+        SpringApplication.run(BillCenterApplication.class, args);
     }
 
 }

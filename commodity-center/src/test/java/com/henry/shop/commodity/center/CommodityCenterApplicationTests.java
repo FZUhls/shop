@@ -1,10 +1,10 @@
-package com.henry.shop.customer.center;
+package com.henry.shop.commodity.center;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CustomerCenterApplicationTests {
+class CommodityCenterApplicationTests {
 
     @Test
     void contextLoads() {

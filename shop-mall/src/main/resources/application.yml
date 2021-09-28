@@ -9,3 +9,12 @@ mybatis-plus:
   configuration:
     auto-mapping-behavior: partial #只对非嵌套的 resultMap 进行自动映射
     map-underscore-to-camel-case: true #开启自动驼峰命名规则映射
+swagger:
+  title: shop-mall
+  description: 商城端接口文档
+  version: 1.0.0
+  basePackage: com.henry.shop.mall
+  contact:
+    name: henry
+    url: https://blog.henrysy.cn/
+    email: 314433307@qq.com

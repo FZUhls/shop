@@ -100,6 +100,7 @@
     <modules>
         <module>base-common</module>
         <module>bill-center</module>
+        <module>bill-center-api</module>
         <module>commodity-center</module>
         <module>commodity-center-api</module>
         <module>customer-center</module>

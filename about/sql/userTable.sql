@@ -1,6 +1,7 @@
 
 use shop;
 -- 用户模块 usr
+drop table if exists usr_customer;
 create table usr_customer(
     id bigint primary key AUTO_INCREMENT,
     phone char(11) comment "手机号，同时也是登录账户",
@@ -15,6 +16,7 @@ create table usr_customer(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "用户信息表";
 
+drop table if exists usr_addr;
 create table usr_addr(
     id bigint primary key AUTO_INCREMENT,
     customer_id bigint comment "用户id",
@@ -29,6 +31,7 @@ create table usr_addr(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "收货地址表";
 
+drop table if exists usr_member;
 create table usr_member(
     id bigint primary key AUTO_INCREMENT,
     customer_id bigint comment "用户id",
@@ -40,6 +43,7 @@ create table usr_member(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "会员表";
 
+drop table if exists usr_member_level;
 create table usr_member_level(
 	id bigint primary key AUTO_INCREMENT,
     level_label varchar(32) comment "会员级别标题",
@@ -49,6 +53,7 @@ create table usr_member_level(
 ) ENGINE=InnoDB charset=utf8 comment "会员等级表";
 -- 用户模块 end
 -- 订单模块 bil
+drop table if exists bil_bill_list;
 create table bil_bill_list(
 	id bigint primary key AUTO_INCREMENT,
     customer_id bigint comment "下单用户",
@@ -68,6 +73,16 @@ create table bil_bill_list(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单表";
 
+drop table if exists bil_bill_history;
+create table bil_bill_history(
+    id bigint primary key AUTO_INCREMENT,
+    bill_id bigint comment "订单id",
+    change_status int(1) comment "订单状态",
+    oper_role_code tinyint comment "操作者 0-用户 1-商家 2-系统",
+    cre_time datetime comment "创建时间"
+) ENGINE=InnoDB charset=utf8 comment "订单状态变化表";
+
+drop table if exists bil_return;
 create table bil_return(
 	id bigint primary key AUTO_INCREMENT,
     bill_id bigint comment "原单号",
@@ -77,6 +92,7 @@ create table bil_return(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "退货表";
 
+drop table if exists bil_return_history;
 create table bil_return_history(
 	id bigint primary key AUTO_INCREMENT,
     return_id bigint comment "退货单id",
@@ -85,16 +101,18 @@ create table bil_return_history(
     cre_time datetime comment "创建时间"
 ) ENGINE=InnoDB charset=utf8 comment "退货变化记录表";
 
+drop table if exists bil_bill_item;
 create table bil_bill_item(
 	id bigint primary key AUTO_INCREMENT,
     bill_id bigint comment "订单id",
-    sku_id bigint comment "商品id",
+    sku_id bigint comment "商品sku id",
     sku_price decimal(10,2) comment "商品价格",
     number int(4) comment "商品数量",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单明细表";
 
+drop table if exists bil_cart_item;
 create table bil_cart_item(
 	id bigint primary key AUTO_INCREMENT,
     usr_id bigint comment "用户id ",
@@ -105,6 +123,7 @@ create table bil_cart_item(
 -- 订单模块 end
 
 -- 商品模块 com
+drop table if exists com_brand;
 create table com_brand(
     id bigint primary key AUTO_INCREMENT,
     brand_code varchar(127) comment "品牌编号",
@@ -113,6 +132,7 @@ create table com_brand(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "品牌表";
 
+drop table if exists com_category;
 create table com_category(
     id bigint primary key AUTO_INCREMENT,
     parant_id bigint comment "分类的父级类目",
@@ -122,6 +142,7 @@ create table com_category(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "分类表";
 
+drop table if exists com_param_group;
 create table com_param_group(
     id bigint primary key AUTO_INCREMENT,
 	name varchar(31) comment "参数组名",
@@ -130,6 +151,7 @@ create table com_param_group(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "商品参数组";
 
+drop table if exists com_param;
 create table com_param(
 	id bigint primary key AUTO_INCREMENT,
     param_group_id bigint comment "所属参数组id",
@@ -139,6 +161,7 @@ create table com_param(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "参数名表";
 
+drop table if exists com_param_item;
 create table com_param_item(
 	id bigint primary key AUTO_INCREMENT,
     param_id bigint comment "参数id",
@@ -149,6 +172,7 @@ create table com_param_item(
 ) ENGINE=InnoDB charset=utf8 comment "商品参数值表";
 
 -- 商品和参数组是N:N的关系。一些参数组可以复用。
+drop table if exists com_category_param_group_relation;
 create table com_category_param_group_relation(
 	id bigint primary key AUTO_INCREMENT,
 	category_id bigint comment "分类id",
@@ -158,6 +182,7 @@ create table com_category_param_group_relation(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "分类和参数组关联表";
 
+drop table if exists com_commodity;
 create table com_commodity(
     id bigint primary key AUTO_INCREMENT,
     name varchar(127) comment "商品名",
@@ -170,6 +195,7 @@ create table com_commodity(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "SPU（商品）表";
 
+drop table if exists com_variant_group;
 create table com_variant_group(
 	id bigint primary key AUTO_INCREMENT,
 	variant_numbr int(4) comment "规格参数数量",
@@ -178,6 +204,7 @@ create table com_variant_group(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "规格组表";
 
+drop table if exists com_variant;
 create table com_variant(
 	id bigint primary key AUTO_INCREMENT,
     name varchar(31) comment "规格名",
@@ -185,6 +212,7 @@ create table com_variant(
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "规格名表";
 
+drop table if exists com_variant_item;
 create table com_variant_item(
 	id bigint primary key AUTO_INCREMENT,
     variant_id bigint comment "规格id",
@@ -193,6 +221,8 @@ create table com_variant_item(
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "规格表";
+
+drop table if exists com_sku;
 create table com_sku(
 	id bigint primary key AUTO_INCREMENT,
     sku_code varchar(31) comment "sku 编码",
