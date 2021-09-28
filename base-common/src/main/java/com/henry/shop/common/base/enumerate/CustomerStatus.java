@@ -6,20 +6,20 @@ import lombok.Getter;
 
 /**
  * @author henry1
- * 收获方式枚举类
+ * 顾客账户状态枚举
  */
-@Getter
 @AllArgsConstructor
-public enum ReceiveType{
+@Getter
+public enum CustomerStatus {
     /**
-     * 提货方式--物流
+     * 账号有效
      */
-    EXPRESS(0,"物流"),
+    VALID(1,"有效"),
     /**
-     * 提货方式--门店自提
+     * 账号无效
      */
-    SELF_PICKUP(1,"门店自提");
+    INVALID(0,"无效");
     @EnumValue
-    private final Integer code;
+    private final int code;
     private final String label;
 }

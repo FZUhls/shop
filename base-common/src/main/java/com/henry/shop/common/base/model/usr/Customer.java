@@ -1,6 +1,8 @@
 package com.henry.shop.common.base.model.usr;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.CustomerStatus;
+import com.henry.shop.common.base.enumerate.Sex;
 import lombok.Data;
 
 import java.util.Date;
@@ -36,11 +38,11 @@ public class Customer {
     /**
      * 性别  1 为男性，0 为女性
      */
-    private Integer sex;
+    private Sex sex;
     /**
      * 账户状态 0---无效 1---有效
      */
-    private Integer cusStatus;
+    private CustomerStatus status;
     /**
      * 头像图片url
      */

@@ -13,7 +13,16 @@ import java.util.Date;
 @Data
 public class ComVariant {
     private Long id;
+    /**
+     * 规格名
+     */
     private String name;
+    /**
+     * 创建时间
+     */
     private Date creTime;
+    /**
+     * 更新时间
+     */
     private Date updTime;
 }

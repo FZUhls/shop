@@ -1,22 +1,24 @@
 package com.henry.shop.common.base.model.bil;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.BillSourceType;
+import com.henry.shop.common.base.enumerate.BillStatus;
 import com.henry.shop.common.base.enumerate.ReceiveType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
-import org.apache.ibatis.annotations.ConstructorArgs;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author henry1
+ * 订单实体类
+ */
 @Data
 @TableName("bil_bill_list")
 @ApiModel("订单")
-public class BillList {
+public class Bill {
     private Long id;
     /**
      * 顾客ID
@@ -66,11 +68,11 @@ public class BillList {
     /**
      * 订单状态 0-未付款 1-待发货 2-待收货 3-已收货
      */
-    private Integer billStatus;
+    private BillStatus billStatus;
     /**
      * 订单来源 0-网上商城 1-移动商城 2-线下门店
      */
-    private Integer sourceType;
+    private BillSourceType sourceType;
     /**
      * 创建时间
      */

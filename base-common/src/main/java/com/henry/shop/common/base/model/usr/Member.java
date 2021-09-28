@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.model.usr;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.MemberStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -24,7 +25,7 @@ public class Member {
     /**
      * 会员状态
      */
-    private Integer memStatus;
+    private MemberStatus status;
     /**
      * 会员积分
      */

@@ -1,25 +1,30 @@
 package com.henry.shop.common.base.enumerate;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 操作角色枚举
  * @author henry1
- * 收获方式枚举类
  */
 @Getter
 @AllArgsConstructor
-public enum ReceiveType{
+public enum OperationRole {
     /**
-     * 提货方式--物流
+     * 用户角色
      */
-    EXPRESS(0,"物流"),
+    CUSTOMER(0,"用户"),
     /**
-     * 提货方式--门店自提
+     * 商家角色
      */
-    SELF_PICKUP(1,"门店自提");
+    TENANT(1,"商家"),
+    /**
+     * 系统角色
+     */
+    SYSTEM(2,"系统");
     @EnumValue
-    private final Integer code;
+    private final int code;
     private final String label;
 }

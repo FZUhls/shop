@@ -6,20 +6,25 @@ import lombok.Getter;
 
 /**
  * @author henry1
- * 收获方式枚举类
+ * 订单来源
  */
 @Getter
 @AllArgsConstructor
-public enum ReceiveType{
+public enum BillSourceType {
     /**
-     * 提货方式--物流
+     * PC商城
      */
-    EXPRESS(0,"物流"),
+    PC_MALL(0,"网上商城"),
     /**
-     * 提货方式--门店自提
+     * 移动商城
      */
-    SELF_PICKUP(1,"门店自提");
+    MOBILE_MALL(1,"移动商城"),
+    /**
+     * 线下门店
+     */
+    OUTLINE_SHOP(2,"线下门店");
+
     @EnumValue
-    private final Integer code;
+    private final int code;
     private final String label;
 }

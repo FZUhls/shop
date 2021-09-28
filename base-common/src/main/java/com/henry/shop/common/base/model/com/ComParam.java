@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.model.com;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.ParamType;
 import lombok.Data;
 
 import java.util.Date;
@@ -24,7 +25,7 @@ public class ComParam {
     /**
      * 参数类型
      */
-    private Integer type;
+    private ParamType type;
     /**
      * 创建时间
      */

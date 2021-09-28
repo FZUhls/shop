@@ -6,20 +6,22 @@ import lombok.Getter;
 
 /**
  * @author henry1
- * 收获方式枚举类
+ * 性别枚举
  */
 @Getter
 @AllArgsConstructor
-public enum ReceiveType{
+public enum Sex {
+
     /**
-     * 提货方式--物流
+     * 男士
      */
-    EXPRESS(0,"物流"),
+    MALE(1,"男性"),
     /**
-     * 提货方式--门店自提
+     * 女士
      */
-    SELF_PICKUP(1,"门店自提");
+    FEMALE(0,"女性");
+
     @EnumValue
-    private final Integer code;
-    private final String label;
+    private final int code;
+    private final String msg;
 }

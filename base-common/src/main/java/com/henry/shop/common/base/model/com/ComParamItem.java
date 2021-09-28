@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * @author henry1
+ * 参数值
  */
 @TableName("com_param_item")
 @Data

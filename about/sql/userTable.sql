@@ -26,7 +26,8 @@ create table usr_addr(
     province_id bigint comment "省编号",
     city_id bigint comment "市编号",
     county_id bigint comment "县编号",
-    addr_detail varchar(255),
+    addr_detail varchar(127) comment "具体地址---细致到几号楼门牌号之类的",
+    full_addr varchar(255) comment "完整地址字符串",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "收货地址表";
@@ -36,7 +37,7 @@ create table usr_member(
     id bigint primary key AUTO_INCREMENT,
     customer_id bigint comment "用户id",
 	mem_level_id int comment "会员等级编号",
-    mem_status boolean comment "会员是否有效",
+    status tinyint(1) comment "会员是否有效 0-无效 1-有效",
     mem_score int comment "会员现有积分",
     mem_cumulative_score int comment "会员累计积分",
     cre_time datetime comment "创建时间",
@@ -67,8 +68,8 @@ create table bil_bill_list(
     coupon_amount decimal(10,2) comment "优惠卷抵扣",
     mem_score_amount decimal(10,2) comment "会员积分抵扣",
     total_amount decimal(10,2) comment "订单现总金额",
-    bill_status int(1) comment "订单状态 0-未付款 1-待发货 2-待收货 3-已收货",
-    source_type int(1) comment "订单来源 0-网上商城 1-移动商城 2-线下门店",
+    bill_status tinyint(1) comment "订单状态 0-未付款 1-待发货 2-已发货 3-已收货 4-已结束 -2-已退货 -1-已取消",
+    source_type tinyint(1) comment "订单来源 0-网上商城 1-移动商城 2-线下门店",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单表";
@@ -77,8 +78,8 @@ drop table if exists bil_bill_history;
 create table bil_bill_history(
     id bigint primary key AUTO_INCREMENT,
     bill_id bigint comment "订单id",
-    change_status int(1) comment "订单状态",
-    oper_role_code tinyint comment "操作者 0-用户 1-商家 2-系统",
+    change_status tinyint(1) comment "订单状态",
+    oper_role tinyint(1) comment "操作者 0-用户 1-商家 2-系统",
     cre_time datetime comment "创建时间"
 ) ENGINE=InnoDB charset=utf8 comment "订单状态变化表";
 
@@ -87,7 +88,7 @@ create table bil_return(
 	id bigint primary key AUTO_INCREMENT,
     bill_id bigint comment "原单号",
     return_amount decimal(10,2) comment "金额",
-    return_status tinyint(1) comment "退货单状态 0-待处理 1-待退货 2-已完成 3-已拒绝",
+    return_status tinyint(1) comment "退货单状态 0-待处理 1-待退货 2-已退货 3-已完成 3-已拒绝",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "退货表";
@@ -96,7 +97,7 @@ drop table if exists bil_return_history;
 create table bil_return_history(
 	id bigint primary key AUTO_INCREMENT,
     return_id bigint comment "退货单id",
-    oper_role_code tinyint comment "操作着 0-用户 1-商家 2-系统",
+    oper_role tinyint comment "操作着 0-用户 1-商家 2-系统",
     change_status tinyint(1) comment "变化状态 0-待处理 1-待退货 2-已完成 3-已拒绝",
     cre_time datetime comment "创建时间"
 ) ENGINE=InnoDB charset=utf8 comment "退货变化记录表";
@@ -190,7 +191,7 @@ create table com_commodity(
     variant_group_id bigint comment "规格组id",
     brand_id bigint comment "品牌名",
 	image_url varchar(255) comment "商品图片url",
-    publish_status tinyint(1) comment "上架状态：0->下架；1->上架",
+    publish_status tinyint(1) comment "上架状态：-1->未上架 0->下架；1->上架",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "SPU（商品）表";

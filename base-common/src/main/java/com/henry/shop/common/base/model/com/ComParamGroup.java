@@ -7,9 +7,10 @@ import java.util.Date;
 
 /**
  * @author henry1
+ * 参数组实体类
  */
 @Data
-@TableName("参数组名")
+@TableName("com_param_group")
 public class ComParamGroup {
     private Long id;
     /**

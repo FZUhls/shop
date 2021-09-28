@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.model.com;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.henry.shop.common.base.enumerate.PublishStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class Commodity {
     /**
      * 上架状态
      */
-    private Integer publishStatus;
+    private PublishStatus publishStatus;
     /**
      * 创建时间
      */

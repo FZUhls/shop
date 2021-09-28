@@ -6,20 +6,24 @@ import lombok.Getter;
 
 /**
  * @author henry1
- * 收获方式枚举类
+ * 上架状态
  */
-@Getter
 @AllArgsConstructor
-public enum ReceiveType{
+@Getter
+public enum PublishStatus {
     /**
-     * 提货方式--物流
+     * 商品未上架
      */
-    EXPRESS(0,"物流"),
+    WAIT_SALE(-1,"未上架"),
     /**
-     * 提货方式--门店自提
+     * 商品已上架
      */
-    SELF_PICKUP(1,"门店自提");
+    ON_SALE(1,"已上架"),
+    /**
+     * 商品已下架
+     */
+    BAN(0,"已下架");
     @EnumValue
-    private final Integer code;
+    private final int code;
     private final String label;
 }

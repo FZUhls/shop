@@ -46,6 +46,10 @@ public class UsrAddress {
      */
     private String addrDetail;
     /**
+     * 完整的地址字符穿
+     */
+    private String fullAddr;
+    /**
      * 创建时间
      */
     private Date creTime;
