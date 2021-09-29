@@ -51,7 +51,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-    @Profile({"prod"})
+    @Profile({"prod","test"})
     @Bean
     Docket disableRestApi(){
         return new Docket(DocumentationType.OAS_30).pathMapping("/")

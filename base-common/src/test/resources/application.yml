@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: '@profileActive@'
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml #指定mapper.xml路径
+  typeEnumsPackage: com.henry.shop.common.base.enumerate
+  global-config:
+    db-config:
+      id-type: auto #全局默认主键类型设置为自增
+  configuration:
+    auto-mapping-behavior: partial #只对非嵌套的 resultMap 进行自动映射
+    map-underscore-to-camel-case: true #开启自动驼峰命名规则映射
+
+swagger:
+  title: shop-business
+  description: 商家端接口文档
+  version: 1.0.0
+  basePackage: com.henry.shop.business
+  contact:
+    name: henry
+    url: https://blog.henrysy.cn/
+    email: 314433307@qq.com
