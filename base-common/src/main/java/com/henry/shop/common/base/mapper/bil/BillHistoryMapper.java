@@ -1,7 +1,7 @@
 package com.henry.shop.common.base.mapper.bil;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.henry.shop.common.base.model.bil.BillHistory;
+import com.henry.shop.common.base.model.dataobj.bil.BillHistory;
 
 /**
  * @author henry1

@@ -1,0 +1,2 @@
+这个文件没有意义，仅为了为使git扫描到当前目录
+This file is meaningless, just notice the fucking git to scan to the current directory.

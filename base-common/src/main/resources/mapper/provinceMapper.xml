@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.henry.shop.common.base.mapper.location.ProvinceMapper">
-    <resultMap id="province" type="com.henry.shop.common.base.model.location.Province">
+    <resultMap id="province" type="com.henry.shop.common.base.model.dataobj.location.Province">
         <id column="id" property="id"/>
         <result column="province_name" property="provinceName"/>
         <result column="province_code" property="provinceCode"/>
@@ -9,7 +9,7 @@
         <result column="lng" property="lng"/>
         <result column="lat" property="lat"/>
     </resultMap>
-    <select id="findAll" resultType="com.henry.shop.common.base.model.location.Province">
+    <select id="findAll" resultType="com.henry.shop.common.base.model.dataobj.location.Province">
         select * from province;
     </select>
 </mapper>

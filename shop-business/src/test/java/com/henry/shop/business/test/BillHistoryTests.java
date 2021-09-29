@@ -3,7 +3,7 @@ package com.henry.shop.business.test;
 import com.henry.shop.common.base.enumerate.BillStatus;
 import com.henry.shop.common.base.enumerate.OperationRole;
 import com.henry.shop.common.base.mapper.bil.BillHistoryMapper;
-import com.henry.shop.common.base.model.bil.BillHistory;
+import com.henry.shop.common.base.model.dataobj.bil.BillHistory;
 import lombok.extern.java.Log;
 import org.junit.jupiter.api.Test;
 import javax.annotation.Resource;
