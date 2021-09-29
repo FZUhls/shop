@@ -9,7 +9,6 @@ spring:
       initial-size: 5 #连接池初始化大小
       min-idle: 10 #最小空闲连接数
       max-active: 20 #最大连接数
-
       stat-view-servlet:
         loginUsername: henry
         login-password: 12345
@@ -24,7 +23,6 @@ spring:
         session-stat-max-count: 10
         principal-session-name: druid_session
         principal-cookie-name: druid_cookie
-
 logging:
   level:
     com.henry.shop.common.base.mapper: debug
