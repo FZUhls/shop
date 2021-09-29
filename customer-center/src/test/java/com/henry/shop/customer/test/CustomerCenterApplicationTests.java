@@ -1,14 +1,13 @@
-package com.henry.shop.mall;
+package com.henry.shop.customer.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ShopMallApplicationTests {
+class CustomerCenterApplicationTests {
 
     @Test
     void contextLoads() {
-
     }
 
 }

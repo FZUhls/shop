@@ -1,13 +1,14 @@
-package com.henry.shop.commodity.center;
+package com.henry.shop.mall.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommodityCenterApplicationTests {
+class ShopMallApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
