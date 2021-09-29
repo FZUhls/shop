@@ -110,5 +110,6 @@
         <module>marketing-center-api</module>
         <module>shop-business</module>
         <module>shop-mall</module>
+        <module>shop-admin</module>
     </modules>
 </project>
