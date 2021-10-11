@@ -23,6 +23,15 @@ spring:
         session-stat-max-count: 10
         principal-session-name: druid_session
         principal-cookie-name: druid_cookie
+  redis:
+    host: localhost
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 8
+        max-wait: 1000
+        min-idle: 0
 logging:
   level:
     com.henry.shop.common.base.mapper: debug
@@ -34,4 +43,3 @@ dubbo:
   consumer:
     timeout: 3000
     version: 1.0.0
-

@@ -9,7 +9,10 @@ import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.websocket.server.PathParam;
 
 /**
  * @author Henry
@@ -22,10 +25,10 @@ public class TestController {
     @Autowired
     ObjectMapper objectMapper;
     @SneakyThrows
-    @GetMapping("test1")
+    @GetMapping("test1/{id}")
     @ApiOperation(value = "测试接口",notes = "测试接口，返回一个省份信息")
-    public Province test1(){
-        Province province = customerService.getProvinceById(1L);
+    public Province test1(@PathVariable Long id){
+        Province province = customerService.getProvinceById(id);
         return province;
     }
 }
