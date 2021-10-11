@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.henry.shop.common.base.enumerate.ParamType;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("com_param")
-public class ComParam {
+public class ComParam implements Serializable {
     private Long id;
     /**
      * 参数组id

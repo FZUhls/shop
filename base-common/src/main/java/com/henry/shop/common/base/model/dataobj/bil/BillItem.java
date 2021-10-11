@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 @Data
 @TableName("bil_bill_item")
 @ApiModel("订单item")
-public class BillItem {
+public class BillItem implements Serializable {
     private Long id;
     /**
      * 订单id

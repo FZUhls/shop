@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("com_commodity")
-public class Commodity {
+public class Commodity implements Serializable {
     private Long id;
     /**
      * 商品名

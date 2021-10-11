@@ -5,6 +5,7 @@ import com.henry.shop.common.base.enumerate.BillStatus;
 import com.henry.shop.common.base.enumerate.OperationRole;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("bil_bill_history")
-public class BillHistory {
+public class BillHistory implements Serializable {
     private Long id;
     private Long billId;
     private BillStatus changeStatus;

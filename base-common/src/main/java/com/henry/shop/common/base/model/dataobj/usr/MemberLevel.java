@@ -3,6 +3,7 @@ package com.henry.shop.common.base.model.dataobj.usr;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @TableName("usr_member_level")
-public class MemberLevel {
+public class MemberLevel implements Serializable {
     private Long id;
     /**
      * 等级头衔

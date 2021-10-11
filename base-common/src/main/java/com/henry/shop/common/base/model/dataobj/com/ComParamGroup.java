@@ -3,6 +3,7 @@ package com.henry.shop.common.base.model.dataobj.com;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @TableName("com_param_group")
-public class ComParamGroup {
+public class ComParamGroup implements Serializable {
     private Long id;
     /**
      * 参数组名

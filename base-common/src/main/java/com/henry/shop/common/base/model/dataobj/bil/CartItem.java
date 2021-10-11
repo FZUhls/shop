@@ -3,6 +3,7 @@ package com.henry.shop.common.base.model.dataobj.bil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  */
 @Data
 @TableName("bil_cart_item")
-public class CartItem {
+public class CartItem implements Serializable {
     private Long id;
     /**
      * 顾客id

@@ -5,6 +5,7 @@ import com.henry.shop.common.base.enumerate.CustomerStatus;
 import com.henry.shop.common.base.enumerate.Sex;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 @Data
 @TableName("usr_customer")
-public class Customer {
+public class Customer implements Serializable {
     private Long id;
     /**
      * 电话号码

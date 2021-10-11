@@ -3,6 +3,7 @@ package com.henry.shop.common.base.model.dataobj.com;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @TableName("com_variant_item")
 @Data
-public class ComVariantItem {
+public class ComVariantItem implements Serializable {
     private Long id;
     /**
      * 规则项id

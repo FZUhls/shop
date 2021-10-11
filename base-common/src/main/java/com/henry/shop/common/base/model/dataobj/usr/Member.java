@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.henry.shop.common.base.enumerate.MemberStatus;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("usr_member")
-public class Member {
+public class Member implements Serializable {
     private Long id;
     /**
      * 顾客id

@@ -26,5 +26,12 @@ spring:
 logging:
   level:
     com.henry.shop.common.base.mapper: debug
-
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://localhost:2181
+  consumer:
+    timeout: 3000
+    version: 1.0.0
 

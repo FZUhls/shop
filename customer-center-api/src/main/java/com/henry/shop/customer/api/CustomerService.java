@@ -6,6 +6,6 @@ import com.henry.shop.common.base.model.dataobj.usr.Customer;
 /**
  * @author henry1
  */
-public interface ProvinceService {
+public interface CustomerService {
     public Province getProvinceById(Long id);
 }

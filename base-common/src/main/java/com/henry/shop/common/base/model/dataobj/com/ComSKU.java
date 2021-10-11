@@ -3,6 +3,7 @@ package com.henry.shop.common.base.model.dataobj.com;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  */
 @Data
 @TableName("com_sku")
-public class ComSKU {
+public class ComSKU implements Serializable {
     private Long id;
     /**
      * sku code 具有唯一性

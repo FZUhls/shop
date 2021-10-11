@@ -13,8 +13,8 @@ swagger:
   title: shop-customer-center
   description: 顾客中心接口文档
   version: 1.0.0
-  basePackage: https://blog.henrysy.cn/
+  basePackage: com.henry.shop.customer
   contact:
     name: henry
-    url: https://baidu.com
+    url: https://blog.henrysy.cn/
     email: 314433307@qq.com

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.henry.shop.common.base.enumerate.OperationRole;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 @TableName("bil_return_history")
 @Data
-public class BillReturnHistory {
+public class BillReturnHistory implements Serializable {
     private Long id;
     /**
      * 退货单id

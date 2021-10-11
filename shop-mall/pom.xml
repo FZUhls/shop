@@ -6,7 +6,6 @@
         <artifactId>shop</artifactId>
         <groupId>com.henry</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/>
     </parent>
     <artifactId>shop-mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
