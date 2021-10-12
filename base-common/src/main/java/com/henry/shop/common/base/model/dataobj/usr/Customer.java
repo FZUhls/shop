@@ -1,5 +1,6 @@
 package com.henry.shop.common.base.model.dataobj.usr;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.henry.shop.common.base.enumerate.CustomerStatus;
 import com.henry.shop.common.base.enumerate.Sex;
@@ -43,6 +44,7 @@ public class Customer implements Serializable {
     /**
      * 账户状态 0---无效 1---有效
      */
+    @TableField("cus_status")
     private CustomerStatus status;
     /**
      * 头像图片url

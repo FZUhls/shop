@@ -1,7 +1,5 @@
 package com.henry.shop.business.test.utilTest;
 
-import cn.hutool.core.net.Ipv4Util;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +16,7 @@ public class Ip2Region {
         System.out.println("百度===="+baidu(ip));
         System.out.println("高德===="+gaode(ip));
     }
-    String  baidu(String ip){
+    String baidu(String ip){
         String ak = "NsdefyudVxV7qou5WsC9UUBzNb1lUZcm";
         String url = "https://api.map.baidu.com/location/ip";
         Map<String ,Object> params = new HashMap<>();
