@@ -25,7 +25,6 @@ public class CustomerManagerImpl implements CustomerManager {
         log.info("插入顾客信息====\n顾客信息 = [{}]",newCustomer);
         return customerMapper.insert(newCustomer);
     }
-
     @Override
     public int update(Customer newCustomer) {
         Customer oldCustomer = customerMapper.selectById(newCustomer.getId());
