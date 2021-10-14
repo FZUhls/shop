@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henry.shop.common.base.mapper.com.BrandMapper">
+
+    <insert id="insertBranch" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into com_brand(brand_code, brand_name, cre_time, upd_time)
+            values
+        <foreach collection="brandList" item="brand" separator=",">
+            (#{brand.brandCode},#{brand.brandName},#{brand.creTime},#{brand.updTime})
+        </foreach>
+    </insert>
+    <select id="getByPageAndName" resultType="com.henry.shop.common.base.model.dataobj.com.Brand">
+        select id,brand_code,brand_name,cre_time,upd_time from com_brand
+        <where>
+            <if test="keyword != null and keyword != ''">
+                brand_name like CONCAT(CONCAT('%', #{keyword}), '%')
+            </if>
+        </where>
+    </select>
+</mapper>

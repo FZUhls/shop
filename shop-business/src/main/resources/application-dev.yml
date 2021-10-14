@@ -43,3 +43,4 @@ dubbo:
   consumer:
     timeout: 3000
     version: 1.0.0
+    check: false

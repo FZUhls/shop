@@ -1,4 +1,4 @@
-
+create database shop;
 use shop;
 -- 用户模块 usr
 drop table if exists usr_customer;
