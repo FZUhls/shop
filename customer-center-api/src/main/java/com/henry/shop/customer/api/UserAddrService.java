@@ -1,7 +1,7 @@
 package com.henry.shop.customer.api;
 
 import com.henry.shop.common.base.model.dataobj.usr.UsrAddress;
-import com.henry.shop.customer.vo.AddressVo;
+import com.henry.shop.customer.dto.AddressVo;
 
 import java.util.List;
 

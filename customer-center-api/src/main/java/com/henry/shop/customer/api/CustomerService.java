@@ -1,11 +1,14 @@
 package com.henry.shop.customer.api;
 
-import com.henry.shop.common.base.model.dataobj.location.Province;
-import com.henry.shop.common.base.model.dataobj.usr.Customer;
+import com.henry.shop.customer.dto.CustomerLoginResponse;
+import com.henry.shop.customer.dto.LoginResponse;
+import com.henry.shop.customer.dto.PasswordLoginRequest;
+import com.henry.shop.customer.dto.RegisterRequest;
 
 /**
  * @author henry1
  */
 public interface CustomerService {
-    public Province getProvinceById(Long id);
+    LoginResponse PassWordLogin(PasswordLoginRequest request);
+    register(RegisterRequest request);
 }

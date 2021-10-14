@@ -1,10 +1,13 @@
-package com.henry.shop.customer.vo;
+package com.henry.shop.customer.dto;
+
+import lombok.Data;
 
 /**
  * 收获地址表单
  * @author henry1
  */
-public class AddressVo {
+@Data
+public class AddressVo{
     /**
      * 客户id
      */
