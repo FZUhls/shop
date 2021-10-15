@@ -129,6 +129,7 @@ create table com_brand(
     id bigint primary key AUTO_INCREMENT,
     brand_code varchar(127) comment "品牌编号",
     brand_name varchar(127) comment "品牌名",
+    short_name varchar(127) comment "品牌简称",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
 ) ENGINE=InnoDB charset=utf8 comment "品牌表";

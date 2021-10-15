@@ -23,6 +23,10 @@ public class Brand implements Serializable {
      */
     private String brandName;
     /**
+     * 简称
+     */
+    private String shortName;
+    /**
      * 创建时间
      */
     private Date creTime;

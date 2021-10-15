@@ -28,6 +28,10 @@ public class ComParam implements Serializable {
      */
     private ParamType type;
     /**
+     * 可选选项，以逗号间隔
+     */
+    private String selectValue;
+    /**
      * 创建时间
      */
     private Date creTime;

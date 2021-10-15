@@ -7,7 +7,7 @@ import lombok.Data;
  * @author henry1
  */
 @Data
-public class AddressVo{
+public class AddressDto{
     /**
      * 客户id
      */
