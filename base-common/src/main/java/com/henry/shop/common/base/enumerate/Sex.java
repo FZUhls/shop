@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.enumerate;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum Sex {
+public enum Sex{
 
     /**
      * 男士
@@ -22,6 +23,7 @@ public enum Sex {
     FEMALE(0,"女性");
 
     @EnumValue
-    private final int code;
+    @JsonValue
+    private final Integer code;
     private final String msg;
 }

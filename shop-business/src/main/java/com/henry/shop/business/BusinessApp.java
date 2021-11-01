@@ -1,15 +1,15 @@
 package com.henry.shop.business;
 
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author Henry
  * 商家端启动类
  */
 @SpringBootApplication(scanBasePackages = {"com.henry.shop"})
-@EnableDubbo(scanBasePackages = "com.henry.shop.business")
+@EnableDiscoveryClient
 public class BusinessApp {
     public static void main(String[] args) {
         SpringApplication.run(BusinessApp.class, args);

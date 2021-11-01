@@ -10,8 +10,8 @@ import com.henry.shop.common.base.exception.BaseException;
 import com.henry.shop.common.base.mapper.com.BrandMapper;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * @author Henry
  */
-@DubboService
+@Service
 @Slf4j
 public class BrandServiceImpl implements BrandService {
 

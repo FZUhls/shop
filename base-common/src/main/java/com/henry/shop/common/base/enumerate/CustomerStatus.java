@@ -1,6 +1,7 @@
 package com.henry.shop.common.base.enumerate;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum CustomerStatus {
+public enum CustomerStatus{
     /**
      * 账号有效
      */
@@ -20,6 +21,7 @@ public enum CustomerStatus {
      */
     INVALID(0,"无效");
     @EnumValue
-    private final int code;
+    @JsonValue
+    private final Integer code;
     private final String label;
 }

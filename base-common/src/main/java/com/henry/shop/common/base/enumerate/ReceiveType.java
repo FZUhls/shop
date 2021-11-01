@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ReceiveType{
+public enum ReceiveType implements Enumerator{
     /**
      * 提货方式--物流
      */
@@ -20,6 +20,6 @@ public enum ReceiveType{
      */
     SELF_PICKUP(1,"门店自提");
     @EnumValue
-    private final Integer code;
+    private final int code;
     private final String label;
 }

@@ -1,7 +1,7 @@
 package com.henry.shop.customer.api;
 
 import com.henry.shop.common.base.model.dataobj.usr.UsrAddress;
-import com.henry.shop.customer.dto.AddressVo;
+import com.henry.shop.customer.dto.AddressDto;
 
 import java.util.List;
 
@@ -16,17 +16,17 @@ public interface UserAddrService {
     List<UsrAddress> getUsrAddressByCusId(Long id);
 
     /**
-     * @param addressVo 地址表单
+     * @param addressDto 地址表单
      * @return Long 返回自增主键
      */
-    Long addUserAddress(AddressVo addressVo);
+    Long addUserAddress(AddressDto addressDto);
 
     /**
      * @param id 收获地址id
-     * @param addressVo 更改的详情
+     * @param addressDto 更改的详情
      * @return Long 返回修改的id
      */
-    Long editUserAddress(Long id, AddressVo addressVo);
+    Long editUserAddress(Long id, AddressDto addressDto);
 
     /**
      * @param id 用户收获地址id

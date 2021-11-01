@@ -1,7 +1,6 @@
 package com.henry.shop.common.base.enumerate;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum OperationRole {
+public enum OperationRole implements Enumerator{
     /**
      * 用户角色
      */

@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ParamType {
+public enum ParamType implements Enumerator{
     /**
      * 单选参数
      */
@@ -26,5 +26,14 @@ public enum ParamType {
 
     @EnumValue
     private final int code;
-    private final String  label;
+    private final String label;
+
+    public static ParamType getByCode(int code){
+        for (ParamType paramType : values()){
+           if(paramType.code == code){
+               return paramType;
+           }
+        }
+        return null;
+    }
 }

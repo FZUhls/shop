@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BillSourceType {
+public enum BillSourceType implements Enumerator {
     /**
      * PC商城
      */

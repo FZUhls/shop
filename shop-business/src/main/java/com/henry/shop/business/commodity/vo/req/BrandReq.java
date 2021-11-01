@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Henry
  */
 @Data
-public class BrandVo implements Serializable {
+public class BrandReq implements Serializable {
     /**
      * 品牌code，唯一性
      */

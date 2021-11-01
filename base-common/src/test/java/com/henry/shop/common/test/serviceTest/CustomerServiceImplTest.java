@@ -2,6 +2,7 @@ package com.henry.shop.common.test.serviceTest;
 
 import com.henry.shop.common.base.enumerate.CustomerStatus;
 import com.henry.shop.common.base.enumerate.Sex;
+import com.henry.shop.common.base.mapper.usr.CustomerMapper;
 import com.henry.shop.common.base.model.dataobj.usr.Customer;
 import com.henry.shop.common.manager.CustomerManager;
 import com.henry.shop.common.test.base.BaseTest;
@@ -13,6 +14,8 @@ import java.util.Date;
 class CustomerServiceImplTest extends BaseTest {
     @Autowired
     CustomerManager customerManager;
+    @Autowired
+    CustomerMapper customerMapper;
     @Test
     void saveTest(){
         Customer customer = new Customer();
@@ -27,5 +30,10 @@ class CustomerServiceImplTest extends BaseTest {
         customer.setCreTime(new Date());
         customer.setUpdTime(new Date());
         customerManager.insert(customer);
+    }
+    @Test
+    void test2(){
+        Customer customer = customerMapper.selectById(3L);
+        System.out.println(customer);
     }
 }

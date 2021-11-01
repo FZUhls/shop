@@ -2,11 +2,13 @@ package com.henry.shop.commodity.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author Henry
  */
 @Data
-public class CategoryDto {
+public class CategoryDto implements Serializable {
     /**
      * 父类id
      */

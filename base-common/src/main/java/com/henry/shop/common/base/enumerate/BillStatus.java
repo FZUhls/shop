@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BillStatus {
+public enum BillStatus implements Enumerator{
 
     /**
      * 未支付

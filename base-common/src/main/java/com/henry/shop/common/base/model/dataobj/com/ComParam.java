@@ -32,6 +32,10 @@ public class ComParam implements Serializable {
      */
     private String selectValue;
     /**
+     * 序号
+     */
+    private int sort;
+    /**
      * 创建时间
      */
     private Date creTime;

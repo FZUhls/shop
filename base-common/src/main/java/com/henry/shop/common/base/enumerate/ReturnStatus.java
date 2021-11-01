@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum ReturnStatus {
+public enum ReturnStatus implements Enumerator{
     /**
      * 退货订单等待处理
      */

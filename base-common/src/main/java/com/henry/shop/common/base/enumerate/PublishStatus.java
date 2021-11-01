@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum PublishStatus {
+public enum PublishStatus implements Enumerator{
     /**
      * 商品未上架
      */

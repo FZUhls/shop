@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum MemberStatus {
+public enum MemberStatus implements Enumerator{
     /**
      * 会员有效
      */

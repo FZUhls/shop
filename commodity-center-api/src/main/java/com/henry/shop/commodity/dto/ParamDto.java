@@ -3,13 +3,13 @@ package com.henry.shop.commodity.dto;
 import com.henry.shop.common.base.enumerate.ParamType;
 import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author Henry
  */
 @Data
-public class ParamDto {
+public class ParamDto implements Serializable {
     /**
      * 参数组id
      */
@@ -23,7 +23,11 @@ public class ParamDto {
      */
     private ParamType type;
     /**
+     * 序号
+     */
+    private int sort;
+    /**
      * 可选内容
      */
-    private List<String> selectValue;
+    private String selectValue;
 }

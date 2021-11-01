@@ -8,4 +8,10 @@ import com.henry.shop.common.base.model.dataobj.com.ComParamGroup;
  * 商品参数组mapper类
  */
 public interface ComParamGroupMapper extends BaseMapper<ComParamGroup> {
+    /**
+     * 插入一条记录，返回主键
+     * @param group 参数组
+     * @return long 主键
+     */
+    long insert0(ComParamGroup group);
 }

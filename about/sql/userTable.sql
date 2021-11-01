@@ -158,6 +158,8 @@ create table com_param(
 	id bigint primary key AUTO_INCREMENT,
     param_group_id bigint comment "所属参数组id",
     name varchar(31) comment "参数名",
+    select_value varchar(127) comment "可选的值",
+    sort tinyint comment "排序",
     type tinyint(1) comment "参数类型",
     cre_time datetime comment "创建时间",
     upd_time datetime comment "修改时间"
