@@ -1,4 +1,4 @@
-package com.henry.shop.commodity.api;
+package com.henry.shop.commodity.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.henry.shop.commodity.dto.ParamDto;
@@ -17,7 +17,7 @@ public interface ParamService {
      * 创建新的参数组
      * @param paramGroupDto
      */
-    void createParamGroup(ParamGroupDto paramGroupDto);
+    int createParamGroup(ParamGroupDto paramGroupDto);
     /**
      * 删除参数组
      * @param id

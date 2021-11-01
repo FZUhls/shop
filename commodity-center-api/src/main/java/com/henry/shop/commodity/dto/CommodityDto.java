@@ -1,5 +1,7 @@
 package com.henry.shop.commodity.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -9,18 +11,22 @@ import java.io.Serializable;
  * @author Henry
  */
 @Data
+@ApiModel("商品dto")
 public class CommodityDto implements Serializable {
     /**
      * 参数组名
      */
+    @ApiModelProperty("参数组名")
     private String name;
     /**
-     * 目录
+     * 分类
      */
+    @ApiModelProperty("类别id")
     private Long categoryId;
     /**
      * 规格组id
      */
+    @ApiModelProperty("规格组id")
     private Long variantGropuId;
 
 }

@@ -1,12 +1,12 @@
-package com.henry.shop.commodity.service;
+package com.henry.shop.commodity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.api.ParamService;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
+import com.henry.shop.commodity.service.ParamService;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.mapper.com.ComParamGroupMapper;
 import com.henry.shop.common.base.mapper.com.ComParamMapper;
@@ -35,7 +35,7 @@ public class ParamServiceImpl implements ParamService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void createParamGroup(ParamGroupDto paramGroupDto) {
+    public int createParamGroup(ParamGroupDto paramGroupDto) {
         log.info("创建新的商品参数组，参数组内容为 = {}", JSON.toJSONString(paramGroupDto));
         String paramGroupName = paramGroupDto.getName();
         Date date = new Date();
@@ -44,8 +44,9 @@ public class ParamServiceImpl implements ParamService {
         comParamGroup.setNum(0);
         comParamGroup.setCreTime(date);
         comParamGroup.setUpdTime(date);
-        comParamGroupMapper.insert(comParamGroup);
+        int count = comParamGroupMapper.insert(comParamGroup);
         log.info("插入新的参数组成功");
+        return count;
     }
 
     private ComParam dtoToBo(ParamDto paramDto) {

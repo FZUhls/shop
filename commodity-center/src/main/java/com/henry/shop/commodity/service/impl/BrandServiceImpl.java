@@ -1,12 +1,14 @@
-package com.henry.shop.commodity.service;
+package com.henry.shop.commodity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.api.BrandService;
 import com.henry.shop.commodity.dto.BrandDto;
+import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.common.base.enumerate.BaseExceptionType;
 import com.henry.shop.common.base.exception.BaseException;
+import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.mapper.com.BrandMapper;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import lombok.extern.slf4j.Slf4j;
@@ -67,10 +69,14 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     @Transactional(readOnly = true)
-    public Brand findById(long id) {
+    public Brand findById(long id) throws DataBaseNotFoundException {
         log.info("根据id查询指定品牌，id = {}",id);
         Brand brand = brandMapper.selectById(id);
         log.info("查询结果为 = {}",JSON.toJSONString(brand));
+        if(Objects.isNull(brand)){
+            log.error("id = {} 的品牌不存在");
+            throw new DataBaseNotFoundException();
+        }
         return brand;
     }
 

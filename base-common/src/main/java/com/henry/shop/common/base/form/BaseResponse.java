@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("基础响应类")
-public class BaseResponse implements Serializable {
+public class BaseResponse<T> implements Serializable {
     /**
      * 响应状态码
      * 1为成功，0为失败，-1为系统异常
@@ -27,7 +27,7 @@ public class BaseResponse implements Serializable {
     protected String msg;
 
     @ApiModelProperty("响应消息")
-    protected Object data;
+    protected T data;
 
 
     /**

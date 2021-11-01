@@ -6,7 +6,7 @@ import com.henry.shop.business.commodity.vo.req.ParamAddReq;
 import com.henry.shop.business.commodity.vo.req.ParamEditReq;
 import com.henry.shop.business.commodity.vo.req.ParamGroupAddReq;
 import com.henry.shop.business.commodity.vo.req.ParamGroupEditReq;
-import com.henry.shop.commodity.api.ParamService;
+import com.henry.shop.commodity.api.ParamRestService;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
 import com.henry.shop.common.base.enumerate.ParamType;
@@ -41,7 +41,7 @@ public class ParamController {
     private static final String DELETE_PARAM = "/delete-param/{id}";
     private static final String SELETE_PARAM = "/params";
 
-    private ParamService paramService;
+    private ParamRestService paramService;
 
     @PostMapping(ADD_GROUP)
     @ApiOperation("添加参数组")
