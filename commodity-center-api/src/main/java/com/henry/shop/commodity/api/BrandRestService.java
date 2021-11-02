@@ -5,20 +5,14 @@ import com.henry.shop.commodity.dto.BrandDto;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Henry
  */
-@Component
-@FeignClient(value = "commodity-center")
+@FeignClient("commodity-center")
 public interface BrandRestService {
-    /**
-     * 批量新增品牌
-     * @param brandVoList
-     * @return
-     */
+
     String BASE_URL = "/commodity/brand";
     String ADD_BRAND = BASE_URL + "/add-brand";
     String SELECT_BRAND = BASE_URL + "/find-brands";
@@ -43,7 +37,7 @@ public interface BrandRestService {
      * @return List 品牌列表
      */
     @GetMapping(SELECT_BRAND_BY_NAME)
-    BaseResponse<IPage<Brand>> findBrandByName(String name, long pageNo, long size);
+    BaseResponse<IPage<Brand>> findBrandByName(@RequestParam("name") String name, @RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
 
     /**
      * 分页获取品牌列表
@@ -52,7 +46,7 @@ public interface BrandRestService {
      * @return List 品牌列表
      */
     @GetMapping(SELECT_BRAND)
-    BaseResponse<IPage<Brand>> getBrandList(long pageNo, long size);
+    BaseResponse<IPage<Brand>> getBrandList(@RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
 
     /**
      * 根据id查询品牌

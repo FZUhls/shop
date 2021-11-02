@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * @author Henry
  */
-@Component
 @FeignClient(value = "commodity-center")
 public interface ParamRestService {
     /**

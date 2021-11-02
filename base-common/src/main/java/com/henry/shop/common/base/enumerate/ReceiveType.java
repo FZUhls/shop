@@ -20,6 +20,6 @@ public enum ReceiveType implements Enumerator{
      */
     SELF_PICKUP(1,"门店自提");
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

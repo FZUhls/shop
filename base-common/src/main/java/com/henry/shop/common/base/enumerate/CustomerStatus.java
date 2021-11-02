@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum CustomerStatus{
+public enum CustomerStatus implements Enumerator{
     /**
      * 账号有效
      */

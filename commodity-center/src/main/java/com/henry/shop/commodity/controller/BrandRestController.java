@@ -5,30 +5,25 @@ import com.henry.shop.commodity.dto.BrandDto;
 import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.common.base.enumerate.Code;
 import com.henry.shop.common.base.exception.BaseException;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @author henry1
  */
 @Slf4j
-@RestController(BrandRestController.BASE_URL)
+@RestController
 public class BrandRestController {
     public static final String BASE_URL = "/commodity/brand";
-    private static final String ADD_BRAND = "/add-brand";
-    private static final String SELECT_BRAND = "/find-brands";
-    private static final String SELECT_BRAND_BY_NAME = "/findByName";
-    private static final String SELECT_BY_ID = "/findById/{id}";
-    private static final String UPDATE_BY_ID = "/update/{id}";
-    private static final String DELETE_BY_ID = "/delete/{id}";
+    private static final String ADD_BRAND = BASE_URL + "/add-brand";
+    private static final String SELECT_BRAND = BASE_URL + "/find-brands";
+    private static final String SELECT_BRAND_BY_NAME = BASE_URL + "/findByName";
+    private static final String SELECT_BY_ID = BASE_URL + "/findById/{id}";
+    private static final String UPDATE_BY_ID = BASE_URL + "/update/{id}";
+    private static final String DELETE_BY_ID = BASE_URL + "/delete/{id}";
 
     @Autowired
     BrandService brandService;

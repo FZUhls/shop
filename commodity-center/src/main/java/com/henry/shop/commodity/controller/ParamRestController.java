@@ -3,7 +3,6 @@ package com.henry.shop.commodity.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
-import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.commodity.service.ParamService;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
@@ -19,17 +18,17 @@ import java.util.List;
  * @author henry1
  */
 @Slf4j
-@RestController(ParamRestController.BASE_URL)
+@RestController
 public class ParamRestController {
-    public static final String BASE_URL = "/commodity/param";
-    private static final String CREATE_PARAM_GROUP = "/createParamGroup";
-    private static final String CREATE_PARAM = "/createParam";
-    private static final String UPDATE_PARAM_GROUP = "/updateParamGroup/{id}";
-    private static final String UPDATE_PARAM = "/updateParam/{id}";
-    private static final String DELETE_PARAM_GROUP = "/deleteParamGroup{id}";
-    private static final String DELETE_PARAM = "/deleteParam/{id}";
-    private static final String SELETE_PARAM_GROUPS = "/selectParamGroups";
-    private static final String SELETE_PARAMS = "/selectParams/{groupId}";
+    private static final String BASE_URL = "/commodity/param";
+    private static final String CREATE_PARAM_GROUP = BASE_URL + "/createParamGroup";
+    private static final String CREATE_PARAM = BASE_URL + "/createParam";
+    private static final String UPDATE_PARAM_GROUP = BASE_URL + "/updateParamGroup/{id}";
+    private static final String UPDATE_PARAM = BASE_URL + "/updateParam/{id}";
+    private static final String DELETE_PARAM_GROUP = BASE_URL + "/deleteParamGroup{id}";
+    private static final String DELETE_PARAM = BASE_URL + "/deleteParam/{id}";
+    private static final String SELETE_PARAM_GROUPS = BASE_URL + "/selectParamGroups";
+    private static final String SELETE_PARAMS = BASE_URL + "/selectParams/{groupId}";
     @Autowired
     ParamService paramService;
     @PostMapping(CREATE_PARAM_GROUP)

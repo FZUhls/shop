@@ -25,7 +25,7 @@ public enum ParamType implements Enumerator{
     INPUT(2,"输入");
 
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 
     public static ParamType getByCode(int code){

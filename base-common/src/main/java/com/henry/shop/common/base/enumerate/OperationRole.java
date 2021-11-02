@@ -24,6 +24,6 @@ public enum OperationRole implements Enumerator{
      */
     SYSTEM(2,"系统");
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

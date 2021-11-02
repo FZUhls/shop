@@ -9,5 +9,5 @@ public interface Enumerator {
      *
      * @return the integer
      */
-    int getCode();
+    Integer getCode();
 }

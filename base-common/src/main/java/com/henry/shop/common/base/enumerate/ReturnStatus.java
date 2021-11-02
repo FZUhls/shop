@@ -36,6 +36,6 @@ public enum ReturnStatus implements Enumerator{
      */
     REFUSE(-1,"已拒绝");
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

@@ -20,6 +20,6 @@ public enum MemberStatus implements Enumerator{
      */
     INVALID(0,"无效");
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

@@ -25,6 +25,6 @@ public enum Code implements Enumerator{
     SYSTEM_ERROR(500,"系统错误");
 
     @JsonValue
-    private final int code;
+    private final Integer code;
     private final String description;
 }

@@ -24,6 +24,6 @@ public enum PublishStatus implements Enumerator{
      */
     BAN(0,"已下架");
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

@@ -1,16 +1,18 @@
 package com.henry.shop.common.test.serviceTest;
 
+import com.alibaba.fastjson.JSON;
 import com.henry.shop.common.base.enumerate.CustomerStatus;
 import com.henry.shop.common.base.enumerate.Sex;
 import com.henry.shop.common.base.mapper.usr.CustomerMapper;
 import com.henry.shop.common.base.model.dataobj.usr.Customer;
 import com.henry.shop.common.manager.CustomerManager;
 import com.henry.shop.common.test.base.BaseTest;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
-
+@Slf4j
 class CustomerServiceImplTest extends BaseTest {
     @Autowired
     CustomerManager customerManager;
@@ -34,6 +36,7 @@ class CustomerServiceImplTest extends BaseTest {
     @Test
     void test2(){
         Customer customer = customerMapper.selectById(3L);
-        System.out.println(customer);
+        log.info(JSON.toJSONString(customer));
     }
+
 }

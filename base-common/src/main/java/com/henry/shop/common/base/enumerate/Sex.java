@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum Sex{
+public enum Sex implements Enumerator{
 
     /**
      * 男士
@@ -23,7 +23,6 @@ public enum Sex{
     FEMALE(0,"女性");
 
     @EnumValue
-    @JsonValue
     private final Integer code;
     private final String msg;
 }

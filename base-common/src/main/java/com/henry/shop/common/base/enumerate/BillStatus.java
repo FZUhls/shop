@@ -42,6 +42,6 @@ public enum BillStatus implements Enumerator{
     RETURN(-2,"已退货");
 
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }

@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication(scanBasePackages = {"com.henry.shop"})
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.henry.shop"})
+@EnableFeignClients(basePackages = {"com.henry.shop.commodity.api"})
 public class BusinessApp {
     public static void main(String[] args) {
         SpringApplication.run(BusinessApp.class, args);

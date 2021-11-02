@@ -25,6 +25,6 @@ public enum BillSourceType implements Enumerator {
     OUTLINE_SHOP(2,"线下门店");
 
     @EnumValue
-    private final int code;
+    private final Integer code;
     private final String label;
 }
