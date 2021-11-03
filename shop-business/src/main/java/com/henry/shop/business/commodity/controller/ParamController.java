@@ -18,6 +18,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +41,8 @@ public class ParamController {
     private static final String UPDATE_PARAM = "/update-param/{id}";
     private static final String DELETE_PARAM = "/delete-param/{id}";
     private static final String SELETE_PARAM = "/params";
-
+    private static final int BASE_PAGE_SIZE = 10;
+    @Autowired
     private ParamRestService paramService;
 
     @PostMapping(ADD_GROUP)
@@ -72,12 +74,9 @@ public class ParamController {
     @GetMapping(SELECT_GROUP)
     @ApiOperation("查询参数组")
     @ApiImplicitParam(name = "page",value = "页码",example = "1")
-    public BaseResponse selectParamGroup(int page){
-        int size = 10;
-        IPage<ComParamGroup> paramGroups = paramService.getParamGroups(page, size);
-        BaseResponse succ = BaseResponse.succ();
-        succ.setData(paramGroups);
-        return succ;
+    public BaseResponse<IPage<ComParamGroup>> selectParamGroup(int page){
+        int size = BASE_PAGE_SIZE;
+        return paramService.getParamGroups(page, size);
     }
     @PostMapping(ADD_PARAM)
     @ApiOperation("添加参数项")
@@ -88,8 +87,7 @@ public class ParamController {
         paramDto.setType(ParamType.getByCode(req.getType()));
         paramDto.setSelectValue(req.getSelectValues());
         paramDto.setSort(req.getSort());
-        paramService.addParamToGroup(paramDto);
-        return BaseResponse.succ();
+        return paramService.addParamToGroup(paramDto);
     }
     @PutMapping(UPDATE_PARAM)
     @ApiOperation("修改参数项")
@@ -100,23 +98,18 @@ public class ParamController {
         paramDto.setType(ParamType.getByCode(req.getType()));
         paramDto.setSelectValue(req.getSelectValues());
         paramDto.setSort(req.getSort());
-        paramService.editParam(paramDto,id);
-        return BaseResponse.succ();
+        return paramService.editParam(paramDto,id);
     }
     @DeleteMapping(DELETE_PARAM)
     @ApiOperation("删除参数项")
     @ApiImplicitParam(name = "id",value = "参数id")
     public BaseResponse deleteParam(@PathVariable long id) throws DataBaseNotFoundException {
-        paramService.deleteParam(id);
-        return BaseResponse.succ();
+        return paramService.deleteParam(id);
     }
     @GetMapping(SELETE_PARAM)
     @ApiOperation("获取参数组中参数项")
     @ApiImplicitParam(name = "groupId",value = "参数组id",example = "1")
-    public BaseResponse getParams(@RequestParam(name = "groupId") long groupId){
-        List<ComParam> params = paramService.getParams(groupId);
-        BaseResponse succ = BaseResponse.succ();
-        succ.setData(params);
-        return succ;
+    public BaseResponse<List<ComParam>> getParams(@RequestParam(name = "groupId") long groupId){
+        return paramService.getParams(groupId);
     }
 }
