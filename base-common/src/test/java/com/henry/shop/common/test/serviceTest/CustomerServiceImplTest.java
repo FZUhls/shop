@@ -38,5 +38,11 @@ class CustomerServiceImplTest extends BaseTest {
         Customer customer = customerMapper.selectById(3L);
         log.info(JSON.toJSONString(customer));
     }
+    @Test
+    void test3(){
+        String str = "{\"age\":21,\"creTime\":1634825088000,\"iconUrl\":\"21212\",\"id\":\"3\",\"nickName\":\"hahah\",\"passwd\":\"2131321\",\"phone\":\"15559191726\",\"realName\":\"施亨利\",\"sex\":1,\"status\":1,\"updTime\":1634825088000}";
+        Customer customer = JSON.parseObject(str,Customer.class);
+        System.out.println(JSON.toJSONString(customer));
+    }
 
 }
