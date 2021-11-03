@@ -1,6 +1,6 @@
 package com.henry.shop.commodity.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.BrandDto;
 import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.common.base.enumerate.Code;
@@ -29,23 +29,23 @@ public class BrandRestController {
     BrandService brandService;
 
     @PostMapping(ADD_BRAND)
-    public BaseResponse<Integer> addBrand(BrandDto brandVo){
+    public BaseResponse<Integer> addBrand(@RequestBody BrandDto brandVo){
         int count = brandService.addBrand(brandVo);
         BaseResponse<Integer> succ = BaseResponse.succ();
         succ.setData(count);
         return succ;
     }
     @GetMapping(SELECT_BRAND)
-    public BaseResponse<IPage<Brand>> selectBrands(long pageNo, long size){
-        IPage<Brand> brandList = brandService.getBrandList(pageNo, size);
-        BaseResponse<IPage<Brand>> succ = BaseResponse.succ();
+    public BaseResponse<Page<Brand>> selectBrands(long pageNo, long size){
+        Page<Brand> brandList = brandService.getBrandList(pageNo, size);
+        BaseResponse<Page<Brand>> succ = BaseResponse.succ();
         succ.setData(brandList);
         return succ;
     }
     @GetMapping(SELECT_BRAND_BY_NAME)
-    public BaseResponse<IPage<Brand>> selectBrands(long pageNo, long size, String name){
-        IPage<Brand> brandList = brandService.findBrandByName(name,pageNo,size);
-        BaseResponse<IPage<Brand>> succ = BaseResponse.succ();
+    public BaseResponse<Page<Brand>> selectBrands(long pageNo, long size, String name){
+        Page<Brand> brandList = brandService.findBrandByName(name,pageNo,size);
+        BaseResponse<Page<Brand>> succ = BaseResponse.succ();
         succ.setData(brandList);
         return succ;
     }
@@ -65,7 +65,7 @@ public class BrandRestController {
         }
     }
     @PutMapping(UPDATE_BY_ID)
-    public BaseResponse<Integer> update(@PathVariable("id") long id,BrandDto brandDto){
+    public BaseResponse<Integer> update(@PathVariable("id") long id,@RequestBody BrandDto brandDto){
         try {
             int count = brandService.update(id, brandDto);
             BaseResponse<Integer> response = BaseResponse.succ();

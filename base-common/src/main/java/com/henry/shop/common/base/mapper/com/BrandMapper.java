@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface BrandMapper extends BaseMapper<Brand> {
     int insertBranch(@Param("brandList")List<Brand> brandList);
-    IPage<Brand> getByPageAndName(Page<?> page, @Param("keyword") String keyword);
+    Page<Brand> getByPageAndName(Page<?> page, @Param("keyword") String keyword);
 }

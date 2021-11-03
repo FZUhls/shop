@@ -1,6 +1,7 @@
 package com.henry.shop.commodity.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
@@ -36,7 +37,7 @@ public interface ParamService {
      * @param size 页大小
      * @return
      */
-    IPage<ComParamGroup> getParamGroups(long page, long size);
+    Page<ComParamGroup> getParamGroups(long page, long size);
 
 
     /**

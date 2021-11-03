@@ -1,6 +1,7 @@
 package com.henry.shop.commodity.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.BrandDto;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
@@ -27,7 +28,7 @@ public interface BrandRestService {
      * @return
      */
     @PostMapping(ADD_BRAND)
-    BaseResponse<Integer> addBrand(BrandDto brandVo);
+    BaseResponse<Integer> addBrand(@RequestBody BrandDto brandVo);
 
     /**
      * 按名查询品牌，支持模糊查询
@@ -37,7 +38,7 @@ public interface BrandRestService {
      * @return List 品牌列表
      */
     @GetMapping(SELECT_BRAND_BY_NAME)
-    BaseResponse<IPage<Brand>> findBrandByName(@RequestParam("name") String name, @RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
+    BaseResponse<Page<Brand>> findBrandByName(@RequestParam("name") String name, @RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
 
     /**
      * 分页获取品牌列表
@@ -46,7 +47,7 @@ public interface BrandRestService {
      * @return List 品牌列表
      */
     @GetMapping(SELECT_BRAND)
-    BaseResponse<IPage<Brand>> getBrandList(@RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
+    BaseResponse<Page<Brand>> getBrandList(@RequestParam("pageNo") long pageNo, @RequestParam("size") long size);
 
     /**
      * 根据id查询品牌
@@ -63,7 +64,7 @@ public interface BrandRestService {
      * @return int 修改的行数
      */
     @PutMapping(UPDATE_BY_ID)
-    BaseResponse<Integer> update(@PathVariable("id") long id,BrandDto brandDto);
+    BaseResponse<Integer> update(@PathVariable("id") long id,@RequestBody BrandDto brandDto);
 
     /**
      * 根据id删除品牌

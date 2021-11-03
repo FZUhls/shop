@@ -2,6 +2,7 @@ package com.henry.shop.business.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.business.base.BaseController;
 import com.henry.shop.business.commodity.vo.req.BrandReq;
 import com.henry.shop.commodity.api.BrandRestService;
@@ -21,34 +22,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Henry
  */
 @Slf4j
-@RestController(BrandController.BASE_URI)
+@RestController
 @Api(tags = "商品管理", value = "品牌管理")
 public class BrandController extends BaseController {
     public static final String BASE_URI = "/brand";
-    private static final String ADD = "/addOne";
-    private static final String GET_LIST = "/getList";
-    private static final String QUERY_BY_KEYWORD = "/findByName";
-    private static final String DELETE = "/delete/{id}";
-    private static final String UPDATE = "/update";
-    private static final String GET_ONE = "/select/{id}";
+    private static final String ADD = BASE_URI + "/addOne";
+    private static final String GET_LIST = BASE_URI + "/getList";
+    private static final String QUERY_BY_KEYWORD = BASE_URI + "/findByName";
+    private static final String DELETE = BASE_URI + "/delete/{id}";
+    private static final String UPDATE = BASE_URI + "/update";
+    private static final String GET_ONE = BASE_URI + "/select/{id}";
 
     @Autowired
     private BrandRestService brandService;
 
     @GetMapping(GET_LIST)
     @ApiOperation(value = "分页查询品牌列表")
-    public BaseResponse<IPage<Brand>> getList(Integer pageNo, Integer size) {
+    public BaseResponse<Page<Brand>> getList(Integer pageNo, Integer size) {
         log.info("请求分页查询品牌列表====页号 {}页，页大小 {}条", pageNo, size);
-        BaseResponse<IPage<Brand>> response = brandService.getBrandList(pageNo, size);
+        BaseResponse<Page<Brand>> response = brandService.getBrandList(pageNo, size);
         log.info("查询到的品牌列表 = {}", JSON.toJSONString(response));
         return response;
     }
 
     @GetMapping(QUERY_BY_KEYWORD)
     @ApiOperation(value = "根据关键字分页查询品牌列表")
-    public BaseResponse<IPage<Brand>> getListByName(Integer pageNo, Integer size, String keyword) {
+    public BaseResponse<Page<Brand>> getListByName(Integer pageNo, Integer size, String keyword) {
         log.info("根据关键字请求分页查询品牌列表====页号 {}页，页大小 {}条,关键字为 {} ", pageNo, size, keyword);
-        BaseResponse<IPage<Brand>> response = brandService.findBrandByName(keyword, pageNo, size);
+        BaseResponse<Page<Brand>> response = brandService.findBrandByName(keyword, pageNo, size);
         log.info("查询到的品牌列表 = {}", JSON.toJSONString(response));
         return response;
     }

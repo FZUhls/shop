@@ -1,6 +1,7 @@
 package com.henry.shop.commodity.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.BrandDto;
 import com.henry.shop.common.base.exception.BaseException;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
@@ -33,7 +34,7 @@ public interface BrandService {
      * @param size 页长
      * @return List 品牌列表
      */
-    IPage<Brand> findBrandByName(String name, long pageNo, long size);
+    Page<Brand> findBrandByName(String name, long pageNo, long size);
 
     /**
      * 分页获取品牌列表
@@ -41,7 +42,7 @@ public interface BrandService {
      * @param size 页长
      * @return List 品牌列表
      */
-    IPage<Brand> getBrandList(long pageNo, long size);
+    Page<Brand> getBrandList(long pageNo, long size);
 
     /**
      * 根据id查询品牌

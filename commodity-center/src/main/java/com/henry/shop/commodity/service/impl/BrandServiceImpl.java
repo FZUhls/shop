@@ -52,18 +52,18 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     @Transactional(readOnly = true)
-    public IPage<Brand> findBrandByName(String name, long pageNo, long size) {
+    public Page<Brand> findBrandByName(String name, long pageNo, long size) {
         Page<Brand> page = new Page(pageNo,size);
         String keyWord = name.trim();
         log.info("分页查询条件为 {} ，name = {} ",JSON.toJSONString(page),keyWord);
-        IPage<Brand> brandIPage = brandMapper.getByPageAndName(page, keyWord);
+        Page<Brand> brandIPage = brandMapper.getByPageAndName(page, keyWord);
         log.info("分页查询结果为 {}",JSON.toJSONString(brandIPage));
         return brandIPage;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public IPage<Brand> getBrandList(long pageNo, long size) {
+    public Page<Brand> getBrandList(long pageNo, long size) {
         return this.findBrandByName("",pageNo,size);
     }
 
@@ -90,8 +90,8 @@ public class BrandServiceImpl implements BrandService {
             throw BaseExceptionType.ENTITY_NOT_FOUND.newBaseException();
         }
         log.info("修改前的信息 = {}",JSON.toJSONString(brand));
-        brand.setBrandName(brand.getBrandName());
-        brand.setBrandCode(brand.getBrandCode());
+        brand.setBrandName(brandDto.getBrandName());
+        brand.setBrandCode(brandDto.getBrandCode());
         brand.setUpdTime(new Date());
         int num = brandMapper.updateById(brand);
         log.info("修改的行数为{}行",num);

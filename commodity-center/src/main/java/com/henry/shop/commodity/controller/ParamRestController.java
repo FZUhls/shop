@@ -1,6 +1,6 @@
 package com.henry.shop.commodity.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
 import com.henry.shop.commodity.service.ParamService;
@@ -32,14 +32,14 @@ public class ParamRestController {
     @Autowired
     ParamService paramService;
     @PostMapping(CREATE_PARAM_GROUP)
-    public BaseResponse createParamGroup(ParamGroupDto paramGroupDto){
+    public BaseResponse createParamGroup(@RequestBody ParamGroupDto paramGroupDto){
         int count = paramService.createParamGroup(paramGroupDto);
         BaseResponse succ = BaseResponse.succ();
         succ.setData(count);
         return succ;
     }
     @PostMapping(CREATE_PARAM)
-    public BaseResponse createParam(ParamDto paramDto){
+    public BaseResponse createParam(@RequestBody ParamDto paramDto){
         try {
             paramService.addParamToGroup(paramDto);
             BaseResponse response = BaseResponse.succ();
@@ -52,10 +52,7 @@ public class ParamRestController {
         }
     }
     @PutMapping(UPDATE_PARAM_GROUP)
-    public BaseResponse updateParamGroup(@PathVariable("id") long id, String name){
-        ParamGroupDto paramGroupDto = new ParamGroupDto();
-        paramGroupDto.setId(id);
-        paramGroupDto.setName(name);
+    public BaseResponse updateParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto){
         try {
             paramService.editParamGroup(paramGroupDto);
             BaseResponse response = BaseResponse.succ();
@@ -68,7 +65,7 @@ public class ParamRestController {
         }
     }
     @PutMapping(UPDATE_PARAM)
-    public BaseResponse updateParam(@PathVariable("id") long id,ParamDto paramDto){
+    public BaseResponse updateParam(@PathVariable("id") long id,@RequestBody ParamDto paramDto){
         try {
             paramService.editParam(paramDto,id);
             BaseResponse response = BaseResponse.succ();
@@ -107,9 +104,9 @@ public class ParamRestController {
         }
     }
     @GetMapping(SELETE_PARAM_GROUPS)
-    public BaseResponse<IPage<ComParamGroup>> getParamGroups(long page, long size){
-        IPage<ComParamGroup> paramGroups = paramService.getParamGroups(page, size);
-        BaseResponse<IPage<ComParamGroup>> response = BaseResponse.succ();
+    public BaseResponse<Page<ComParamGroup>> getParamGroups(long page, long size){
+        Page<ComParamGroup> paramGroups = paramService.getParamGroups(page, size);
+        BaseResponse<Page<ComParamGroup>> response = BaseResponse.succ();
         response.setData(paramGroups);
         return response;
     }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.henry.shop.common.base.mapper.com.ComParamMapper">
     <select id="selectByGroupId" parameterType="long" resultType="com.henry.shop.common.base.model.dataobj.com.ComParam">
-        select id,param_group_id,name,type,select_value,cre_time,upd_time from com_param
+        select id,param_group_id,name,type,select_value,sort,cre_time,upd_time from com_param
             where param_group_id = #{groupId}
     </select>
     <delete id="deleteByGroupId" parameterType="long">

@@ -1,5 +1,6 @@
 package com.henry.shop.common.test.serviceTest;
 
+import com.alibaba.fastjson.JSON;
 import com.henry.shop.common.base.enumerate.ParamType;
 import com.henry.shop.common.base.mapper.com.ComParamMapper;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
@@ -26,7 +27,7 @@ public class ParamServiceTest extends BaseTest {
     }
     @Test
     void test1(){
-        ComParam comParam = comParamMapper.selectById(14L);
-        System.out.println(comParam);
+        ComParam comParam = comParamMapper.selectById(3L);
+        System.out.println(JSON.toJSONString(comParam));
     }
 }

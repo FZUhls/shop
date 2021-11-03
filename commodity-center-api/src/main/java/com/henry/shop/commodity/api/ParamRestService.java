@@ -1,6 +1,7 @@
 package com.henry.shop.commodity.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.ParamDto;
 import com.henry.shop.commodity.dto.ParamGroupDto;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
@@ -31,7 +32,7 @@ public interface ParamRestService {
      * @param paramGroupDto
      */
     @PostMapping(CREATE_PARAM_GROUP)
-    BaseResponse createParamGroup(ParamGroupDto paramGroupDto);
+    BaseResponse createParamGroup(@RequestBody ParamGroupDto paramGroupDto);
     /**
      * 删除参数组
      * @param id
@@ -39,12 +40,15 @@ public interface ParamRestService {
     @DeleteMapping(DELETE_PARAM_GROUP)
     BaseResponse deleteParamGroup(@PathVariable("id") Long id) throws DataBaseNotFoundException;
 
+
     /**
-     * 修改参数组
+     * @param id
      * @param paramGroupDto
+     * @return
+     * @throws DataBaseNotFoundException
      */
     @PutMapping(UPDATE_PARAM_GROUP)
-    BaseResponse editParamGroup(ParamGroupDto paramGroupDto) throws DataBaseNotFoundException;
+    BaseResponse editParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto) throws DataBaseNotFoundException;
 
 
     /**
@@ -53,7 +57,7 @@ public interface ParamRestService {
      * @return
      */
     @GetMapping(SELETE_PARAM_GROUPS)
-    BaseResponse<IPage<ComParamGroup>> getParamGroups(@RequestParam("page") long page, @RequestParam("size") long size);
+    BaseResponse<Page<ComParamGroup>> getParamGroups(@RequestParam("page") long page, @RequestParam("size") long size);
 
 
     /**
@@ -67,7 +71,7 @@ public interface ParamRestService {
      * @param paramDto
      */
     @PostMapping(CREATE_PARAM)
-    BaseResponse addParamToGroup(ParamDto paramDto) throws DataBaseNotFoundException;
+    BaseResponse addParamToGroup(@RequestBody ParamDto paramDto) throws DataBaseNotFoundException;
 
     /**
      * 修改参数组
@@ -75,7 +79,7 @@ public interface ParamRestService {
      * @throws DataBaseNotFoundException
      */
     @PutMapping(UPDATE_PARAM)
-    BaseResponse editParam(ParamDto paramDto,@PathVariable("id") long id) throws DataBaseNotFoundException;
+    BaseResponse editParam(@RequestBody ParamDto paramDto,@PathVariable("id") long id) throws DataBaseNotFoundException;
 
     /**
      * @param id

@@ -2,6 +2,7 @@ package com.henry.shop.business.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.business.commodity.vo.req.ParamAddReq;
 import com.henry.shop.business.commodity.vo.req.ParamEditReq;
 import com.henry.shop.business.commodity.vo.req.ParamGroupAddReq;
@@ -30,17 +31,17 @@ import java.util.List;
  */
 @Slf4j
 @Api(value = "参数管理",tags = "商品管理")
-@RestController(ParamController.BASE_URI)
+@RestController
 public class ParamController {
     public static final String BASE_URI = "/param";
-    private static final String ADD_GROUP = "/add-group";
-    private static final String UPDATE_GROUP = "/update-group/{id}";
-    private static final String DELETE_GROUP = "/delete-group/{id}";
-    private static final String SELECT_GROUP = "/groups";
-    private static final String ADD_PARAM = "/add-param";
-    private static final String UPDATE_PARAM = "/update-param/{id}";
-    private static final String DELETE_PARAM = "/delete-param/{id}";
-    private static final String SELETE_PARAM = "/params";
+    private static final String ADD_GROUP = BASE_URI + "/add-group";
+    private static final String UPDATE_GROUP = BASE_URI + "/update-group/{id}";
+    private static final String DELETE_GROUP = BASE_URI + "/delete-group/{id}";
+    private static final String SELECT_GROUP = BASE_URI + "/groups";
+    private static final String ADD_PARAM = BASE_URI + "/add-param";
+    private static final String UPDATE_PARAM = BASE_URI + "/update-param/{id}";
+    private static final String DELETE_PARAM = BASE_URI + "/delete-param/{id}";
+    private static final String SELETE_PARAM = BASE_URI + "/params";
     private static final int BASE_PAGE_SIZE = 10;
     @Autowired
     private ParamRestService paramService;
@@ -62,8 +63,7 @@ public class ParamController {
         ParamGroupDto paramGroupDto = new ParamGroupDto();
         paramGroupDto.setId(id);
         paramGroupDto.setName(name);
-        paramService.editParamGroup(paramGroupDto);
-        return BaseResponse.succ();
+        return paramService.editParamGroup(id,paramGroupDto);
     }
     @DeleteMapping(DELETE_GROUP)
     @ApiOperation(value = "删除参数组")
@@ -74,7 +74,7 @@ public class ParamController {
     @GetMapping(SELECT_GROUP)
     @ApiOperation("查询参数组")
     @ApiImplicitParam(name = "page",value = "页码",example = "1")
-    public BaseResponse<IPage<ComParamGroup>> selectParamGroup(int page){
+    public BaseResponse<Page<ComParamGroup>> selectParamGroup(int page){
         int size = BASE_PAGE_SIZE;
         return paramService.getParamGroups(page, size);
     }
