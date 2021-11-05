@@ -1,7 +1,6 @@
 package com.henry.shop.business.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.business.commodity.vo.req.ParamAddReq;
 import com.henry.shop.business.commodity.vo.req.ParamEditReq;
@@ -30,7 +29,7 @@ import java.util.List;
  * 商品参数controller类
  */
 @Slf4j
-@Api(value = "参数管理",tags = "商品管理")
+@Api(value = "参数管理",tags = "商品管理--参数")
 @RestController
 public class ParamController {
     public static final String BASE_URI = "/param";

@@ -1,7 +1,6 @@
 package com.henry.shop.business.commodity.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.business.base.BaseController;
 import com.henry.shop.business.commodity.vo.req.BrandReq;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@Api(tags = "商品管理", value = "品牌管理")
+@Api(tags = "商品管理--品牌", value = "品牌管理")
 public class BrandController extends BaseController {
     public static final String BASE_URI = "/brand";
     private static final String ADD = BASE_URI + "/addOne";
