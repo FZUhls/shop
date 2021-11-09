@@ -11,6 +11,7 @@ import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -40,31 +41,62 @@ public class VariantServiceImpl implements VariantService {
 
     @Override
     public ComVariantGroup createVariantGroup(VariantGroupDto variantGroupDto) {
-
+        ComVariantGroup variantGroup = new ComVariantGroup();
+        variantGroup.setName(variantGroupDto.getName());
+        variantGroup.setVariantNumber(0);
+        variantGroup.setCreTime(new Date());
+        variantGroup.setUpdTime(new Date());
+        comVariantGroupMapper.insert(variantGroup);
+        return variantGroup;
     }
 
     @Override
     public ComVariant createVariant(VariantDto variantDto) {
-        return null;
+        ComVariant variant = new ComVariant();
+        variant.setName(variantDto.getName());
+        variant.setCreTime(new Date());
+        variant.setUpdTime(new Date());
+        comVariantMapper.insert(variant);
+        return variant;
     }
 
     @Override
     public ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataBaseNotFoundException {
-        return null;
+        ComVariantGroup variantGroup = comVariantGroupMapper.selectById(id);
+        if(Objects.isNull(variantGroup)){
+            throw new DataBaseNotFoundException();
+        }
+        variantGroup.setName(variantGroup.getName());
+        variantGroup.setUpdTime(new Date());
+        comVariantGroupMapper.updateById(variantGroup);
+        return variantGroup;
     }
 
     @Override
     public ComVariant updateVariant(long id, VariantDto variantDto) throws DataBaseNotFoundException {
-        return null;
+        ComVariant variant = comVariantMapper.selectById(id);
+        if(Objects.isNull(variant)){
+            throw new DataBaseNotFoundException();
+        }
+        variant.setName(variantDto.getName());
+        variant.setUpdTime(new Date());
+        comVariantMapper.updateById(variant);
+        return variant;
     }
 
     @Override
     public void deleteVariantGroup(long id) throws DataBaseNotFoundException {
-
+        int count = comVariantGroupMapper.deleteById(id);
+        if(count < 1){
+            throw new DataBaseNotFoundException();
+        }
     }
 
     @Override
     public void deleteVariant(long id) throws DataBaseNotFoundException {
-
+        int count = comVariantGroupMapper.deleteById(id);
+        if(count < 1){
+            throw new DataBaseNotFoundException();
+        }
     }
 }

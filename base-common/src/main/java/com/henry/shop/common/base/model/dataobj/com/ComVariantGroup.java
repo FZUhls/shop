@@ -17,7 +17,7 @@ public class ComVariantGroup implements Serializable {
     /**
      * 规格项数量
      */
-    private Long variantNumber;
+    private Integer variantNumber;
     /**
      * 规格组名称
      */

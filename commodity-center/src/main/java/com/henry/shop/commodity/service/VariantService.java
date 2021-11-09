@@ -5,6 +5,7 @@ import com.henry.shop.commodity.dto.req.VariantGroupDto;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -28,7 +29,7 @@ public interface VariantService {
      * 根据id获取规格组
      * @param groupId 规格组id
      * @return ComVariantGroup规格组
-     * @throws 查询不到时抛出异常
+     * @throws DataBaseNotFoundException 查询不到时抛出异常
      */
     ComVariantGroup getVariantGroupById(long groupId) throws DataBaseNotFoundException;
 
@@ -45,12 +46,14 @@ public interface VariantService {
      * @param variantGroupDto 规格组dto
      * @return 创建成功的结果
      */
+    @Transactional(rollbackFor = Exception.class)
     ComVariantGroup createVariantGroup(VariantGroupDto variantGroupDto);
 
     /**
      * @param variantDto 规格组
      * @return 创建成功的结果
      */
+    @Transactional(rollbackFor = Exception.class)
     ComVariant createVariant(VariantDto variantDto);
 
     /**
@@ -59,6 +62,7 @@ public interface VariantService {
      * @return 修改后的规格组
      * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
      */
+    @Transactional(rollbackFor = Exception.class)
     ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataBaseNotFoundException;
 
     /**
@@ -67,17 +71,20 @@ public interface VariantService {
      * @return 修改后的规格
      * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
      */
+    @Transactional(rollbackFor = Exception.class)
     ComVariant updateVariant(long id,VariantDto variantDto) throws DataBaseNotFoundException;
 
     /**
      * @param id 规格组id
      * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
      */
+    @Transactional(rollbackFor = Exception.class)
     void deleteVariantGroup(long id) throws DataBaseNotFoundException;
 
     /**
      * @param id 规格组id
      * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
      */
+    @Transactional(rollbackFor = Exception.class)
     void deleteVariant(long id) throws DataBaseNotFoundException;
 }
