@@ -1,8 +1,8 @@
 package com.henry.shop.commodity.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.dto.ParamDto;
-import com.henry.shop.commodity.dto.ParamGroupDto;
+import com.henry.shop.commodity.dto.req.ParamDto;
+import com.henry.shop.commodity.dto.req.ParamGroupDto;
 import com.henry.shop.commodity.service.ParamService;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;

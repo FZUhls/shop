@@ -1,7 +1,7 @@
 package com.henry.shop.commodity.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.dto.BrandDto;
+import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.common.base.enumerate.Code;
 import com.henry.shop.common.base.exception.BaseException;

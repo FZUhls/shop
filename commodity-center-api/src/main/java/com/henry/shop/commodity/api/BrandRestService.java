@@ -1,8 +1,7 @@
 package com.henry.shop.commodity.api;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.dto.BrandDto;
+import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -61,7 +60,7 @@ public interface BrandRestService {
      * 根据id更新品牌
      * @param id 被更新的品牌id
      * @param brandDto 更新内容
-     * @return int 修改的行数
+     * @return 修改的行数
      */
     @PutMapping(UPDATE_BY_ID)
     BaseResponse<Integer> update(@PathVariable("id") long id,@RequestBody BrandDto brandDto);

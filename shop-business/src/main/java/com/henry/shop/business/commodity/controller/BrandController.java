@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.business.base.BaseController;
 import com.henry.shop.business.commodity.vo.req.BrandReq;
 import com.henry.shop.commodity.api.BrandRestService;
-import com.henry.shop.commodity.dto.BrandDto;
+import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import io.swagger.annotations.Api;
@@ -88,6 +88,11 @@ public class BrandController extends BaseController {
         return response;
     }
 
+    /**
+     * 将vo表单转为dto
+     * @param brandVo 品牌vo表单
+     * @return BrandDto 品牌dto
+     */
     private BrandDto voMapToDto(BrandReq brandVo) {
         BrandDto brandDto = new BrandDto();
         brandDto.setBrandName(brandVo.getBrandName());

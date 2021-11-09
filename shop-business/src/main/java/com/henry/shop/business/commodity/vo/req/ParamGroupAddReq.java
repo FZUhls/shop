@@ -10,6 +10,9 @@ import java.io.Serializable;
 @Data
 @ApiModel("参数组添加表单")
 public class ParamGroupAddReq implements Serializable {
+    /**
+     * 参数组名
+     */
     @ApiModelProperty("参数组名")
     @NotNull(message = "参数组名不可为空")
     String name;

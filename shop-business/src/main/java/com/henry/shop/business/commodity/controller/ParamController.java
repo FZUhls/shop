@@ -7,9 +7,8 @@ import com.henry.shop.business.commodity.vo.req.ParamEditReq;
 import com.henry.shop.business.commodity.vo.req.ParamGroupAddReq;
 import com.henry.shop.business.commodity.vo.req.ParamGroupEditReq;
 import com.henry.shop.commodity.api.ParamRestService;
-import com.henry.shop.commodity.dto.ParamDto;
-import com.henry.shop.commodity.dto.ParamGroupDto;
-import com.henry.shop.common.base.enumerate.ParamType;
+import com.henry.shop.commodity.dto.req.ParamDto;
+import com.henry.shop.commodity.dto.req.ParamGroupDto;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
@@ -83,7 +82,7 @@ public class ParamController {
         ParamDto paramDto = new ParamDto();
         paramDto.setParamGroupId(req.getGroupId());
         paramDto.setName(req.getName());
-        paramDto.setType(ParamType.getByCode(req.getType()));
+        paramDto.setType(req.getType());
         paramDto.setSelectValue(req.getSelectValues());
         paramDto.setSort(req.getSort());
         return paramService.addParamToGroup(paramDto);
@@ -94,7 +93,7 @@ public class ParamController {
     public BaseResponse updateParam(ParamEditReq req, @PathVariable long id) throws DataBaseNotFoundException {
         ParamDto paramDto = new ParamDto();
         paramDto.setName(req.getName());
-        paramDto.setType(ParamType.getByCode(req.getType()));
+        paramDto.setType(req.getType());
         paramDto.setSelectValue(req.getSelectValues());
         paramDto.setSort(req.getSort());
         return paramService.editParam(paramDto,id);

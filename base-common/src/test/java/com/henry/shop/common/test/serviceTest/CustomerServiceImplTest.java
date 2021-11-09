@@ -36,9 +36,4 @@ class CustomerServiceImplTest extends BaseTest {
         customerManager.insert(customer);
         log.info(JSON.toJSONString(customer));
     }
-    @Test
-    void update(){
-
-    }
-
 }

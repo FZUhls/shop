@@ -12,6 +12,9 @@ import java.io.Serializable;
 @Data
 @ApiModel("参数组修改表单")
 public class ParamGroupEditReq implements Serializable {
+    /**
+     * 参数组名
+     */
     @ApiModelProperty("参数组名")
     private String name;
 }

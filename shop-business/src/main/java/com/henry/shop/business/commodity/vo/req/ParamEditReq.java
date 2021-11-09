@@ -1,5 +1,6 @@
 package com.henry.shop.business.commodity.vo.req;
 
+import com.henry.shop.common.base.enumerate.ParamType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,8 +15,8 @@ import java.io.Serializable;
 public class ParamEditReq implements Serializable {
     @ApiModelProperty("参数名")
     private String name;
-    @ApiModelProperty("参数类型")
-    private int type;
+    @ApiModelProperty(value = "参数类型",allowableValues = "0,1,2")
+    private ParamType type;
     @ApiModelProperty("可选值")
     private String selectValues;
     @ApiModelProperty("序号")

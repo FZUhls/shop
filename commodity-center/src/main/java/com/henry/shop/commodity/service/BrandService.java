@@ -1,8 +1,7 @@
 package com.henry.shop.commodity.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.dto.BrandDto;
+import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.common.base.exception.BaseException;
 import com.henry.shop.common.base.exception.DataBaseNotFoundException;
 import com.henry.shop.common.base.model.dataobj.com.Brand;

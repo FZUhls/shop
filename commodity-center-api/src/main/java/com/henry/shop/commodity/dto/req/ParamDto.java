@@ -1,4 +1,4 @@
-package com.henry.shop.commodity.dto;
+package com.henry.shop.commodity.dto.req;
 
 import com.henry.shop.common.base.enumerate.ParamType;
 import io.swagger.annotations.ApiModel;

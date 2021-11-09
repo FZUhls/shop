@@ -1,4 +1,4 @@
-package com.henry.shop.commodity.dto;
+package com.henry.shop.commodity.dto.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,6 +7,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 品牌的dto类
+ * @see com.henry.shop.common.base.model.dataobj.com.Brand
  * @author Henry
  */
 @Data
