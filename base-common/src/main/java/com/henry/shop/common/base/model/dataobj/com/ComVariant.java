@@ -15,6 +15,10 @@ import java.util.Date;
 public class ComVariant implements Serializable {
     private Long id;
     /**
+     * 规格组id
+     */
+    private Long groupId;
+    /**
      * 规格名
      */
     private String name;

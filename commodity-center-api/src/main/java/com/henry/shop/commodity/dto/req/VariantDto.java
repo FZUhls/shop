@@ -13,4 +13,8 @@ public class VariantDto {
      * 规格名
      */
     private String name;
+    /**
+     * 规格组id
+     */
+    private long groupId;
 }

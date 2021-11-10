@@ -53,10 +53,14 @@ public class VariantServiceImpl implements VariantService {
     @Override
     public ComVariant createVariant(VariantDto variantDto) {
         ComVariant variant = new ComVariant();
+        variant.setGroupId(variantDto.getGroupId());
         variant.setName(variantDto.getName());
         variant.setCreTime(new Date());
         variant.setUpdTime(new Date());
         comVariantMapper.insert(variant);
+        ComVariantGroup variantGroup = comVariantGroupMapper.selectById(variantDto.getGroupId());
+        variantGroup.setVariantNumber(variantGroup.getVariantNumber()+1);
+        comVariantGroupMapper.updateById(variantGroup);
         return variant;
     }
 
@@ -79,6 +83,7 @@ public class VariantServiceImpl implements VariantService {
             throw new DataBaseNotFoundException();
         }
         variant.setName(variantDto.getName());
+        variant.setGroupId(variant.getGroupId());
         variant.setUpdTime(new Date());
         comVariantMapper.updateById(variant);
         return variant;
@@ -86,17 +91,24 @@ public class VariantServiceImpl implements VariantService {
 
     @Override
     public void deleteVariantGroup(long id) throws DataBaseNotFoundException {
-        int count = comVariantGroupMapper.deleteById(id);
-        if(count < 1){
+        ComVariantGroup variantGroup = comVariantGroupMapper.selectById(id);
+        if(Objects.isNull(variantGroup)){
             throw new DataBaseNotFoundException();
         }
+        comVariantGroupMapper.deleteById(id);
+        comVariantMapper.deleteByGroupId(id,variantGroup.getVariantNumber());
     }
 
     @Override
     public void deleteVariant(long id) throws DataBaseNotFoundException {
-        int count = comVariantGroupMapper.deleteById(id);
-        if(count < 1){
+        ComVariant variant = comVariantMapper.selectById(id);
+        if(Objects.isNull(variant)){
             throw new DataBaseNotFoundException();
         }
+        Long groupId = variant.getGroupId();
+        ComVariantGroup variantGroup = comVariantGroupMapper.selectById(groupId);
+        variantGroup.setVariantNumber(variantGroup.getVariantNumber() - 1);
+        comVariantGroupMapper.updateById(variantGroup);
+        comVariantMapper.deleteById(id);
     }
 }
