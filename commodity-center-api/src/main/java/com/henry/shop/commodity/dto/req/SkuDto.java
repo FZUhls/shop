@@ -13,18 +13,17 @@ import java.math.BigDecimal;
 @Data
 @ToString
 public class SkuDto {
+
     /**
      * sku code 具有唯一性
      */
     private String skuCode;
-    /**
-     * 商品id
-     */
-    private Long commodityId;
+
     /**
      * 价格
      */
-    private BigDecimal price;
+    private String price;
+
     /**
      * 数量
      */
