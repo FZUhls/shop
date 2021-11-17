@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.ParamDto;
 import com.henry.shop.commodity.dto.req.ParamGroupDto;
 import com.henry.shop.commodity.service.ParamService;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
 import com.henry.shop.common.base.model.dataobj.com.ComParamGroup;
@@ -44,7 +44,7 @@ public class ParamRestController {
             paramService.addParamToGroup(paramDto);
             BaseResponse response = BaseResponse.succ();
             return response;
-        } catch (DataBaseNotFoundException e) {
+        } catch (DataNotFoundException e) {
             log.error("添加参数发生异常，异常消息 = {}，异常栈 = {}",e.getLocalizedMessage(),e);
             BaseResponse fail = BaseResponse.fail();
             fail.setMsg(e.getLocalizedMessage());
@@ -57,7 +57,7 @@ public class ParamRestController {
             paramService.editParamGroup(paramGroupDto);
             BaseResponse response = BaseResponse.succ();
             return response;
-        } catch (DataBaseNotFoundException e) {
+        } catch (DataNotFoundException e) {
             log.error("修改参数组发生异常，异常消息 = {}，异常栈 = {}",e.getLocalizedMessage(),e);
             BaseResponse fail = BaseResponse.fail();
             fail.setMsg(e.getLocalizedMessage());
@@ -70,7 +70,7 @@ public class ParamRestController {
             paramService.editParam(paramDto,id);
             BaseResponse response = BaseResponse.succ();
             return response;
-        } catch (DataBaseNotFoundException e) {
+        } catch (DataNotFoundException e) {
             log.error("修改参数发生异常，异常消息 = {}，异常栈 = {}",e.getLocalizedMessage(),e);
             BaseResponse fail = BaseResponse.fail();
             fail.setMsg(e.getLocalizedMessage());
@@ -83,7 +83,7 @@ public class ParamRestController {
             paramService.deleteParamGroup(id);
             BaseResponse response = BaseResponse.succ();
             return response;
-        } catch (DataBaseNotFoundException e) {
+        } catch (DataNotFoundException e) {
             log.error("删除参数发生异常，异常消息 = {}，异常栈 = {}",e.getLocalizedMessage(),e);
             BaseResponse fail = BaseResponse.fail();
             fail.setMsg(e.getLocalizedMessage());
@@ -96,7 +96,7 @@ public class ParamRestController {
             paramService.deleteParam(id);
             BaseResponse response = BaseResponse.succ();
             return response;
-        } catch (DataBaseNotFoundException e) {
+        } catch (DataNotFoundException e) {
             log.error("删除参数发生异常，异常消息 = {}，异常栈 = {}",e.getLocalizedMessage(),e);
             BaseResponse fail = BaseResponse.fail();
             fail.setMsg(e.getLocalizedMessage());

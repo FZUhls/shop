@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henry.shop.common.base.mapper.com.CategoryParamGroupRelaMapper">
+
+    <select id="selectByCategoryId" parameterType="long" resultType="com.henry.shop.common.base.model.dataobj.com.CategoryParamGroupRelation">
+        select id,category_id,param_group_id,alias,cre_time,upd_time from com_category_param_group_relation
+        where category_id = #{categoryId}
+    </select>
+</mapper>

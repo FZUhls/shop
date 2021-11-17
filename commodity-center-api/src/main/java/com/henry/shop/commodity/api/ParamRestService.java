@@ -3,7 +3,7 @@ package com.henry.shop.commodity.api;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.ParamDto;
 import com.henry.shop.commodity.dto.req.ParamGroupDto;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
 import com.henry.shop.common.base.model.dataobj.com.ComParamGroup;
@@ -37,17 +37,17 @@ public interface ParamRestService {
      * @param id
      */
     @DeleteMapping(DELETE_PARAM_GROUP)
-    BaseResponse deleteParamGroup(@PathVariable("id") Long id) throws DataBaseNotFoundException;
+    BaseResponse deleteParamGroup(@PathVariable("id") Long id) throws DataNotFoundException;
 
 
     /**
      * @param id
      * @param paramGroupDto
      * @return
-     * @throws DataBaseNotFoundException
+     * @throws DataNotFoundException
      */
     @PutMapping(UPDATE_PARAM_GROUP)
-    BaseResponse editParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto) throws DataBaseNotFoundException;
+    BaseResponse editParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto) throws DataNotFoundException;
 
 
     /**
@@ -70,21 +70,21 @@ public interface ParamRestService {
      * @param paramDto
      */
     @PostMapping(CREATE_PARAM)
-    BaseResponse addParamToGroup(@RequestBody ParamDto paramDto) throws DataBaseNotFoundException;
+    BaseResponse addParamToGroup(@RequestBody ParamDto paramDto) throws DataNotFoundException;
 
     /**
      * 修改参数组
      * @param paramDto
-     * @throws DataBaseNotFoundException
+     * @throws DataNotFoundException
      */
     @PutMapping(UPDATE_PARAM)
-    BaseResponse editParam(@RequestBody ParamDto paramDto,@PathVariable("id") long id) throws DataBaseNotFoundException;
+    BaseResponse editParam(@RequestBody ParamDto paramDto,@PathVariable("id") long id) throws DataNotFoundException;
 
     /**
      * @param id
-     * @throws DataBaseNotFoundException
+     * @throws DataNotFoundException
      */
     @DeleteMapping(DELETE_PARAM)
-    BaseResponse deleteParam(@PathVariable("id") long id) throws DataBaseNotFoundException;
+    BaseResponse deleteParam(@PathVariable("id") long id) throws DataNotFoundException;
 
 }

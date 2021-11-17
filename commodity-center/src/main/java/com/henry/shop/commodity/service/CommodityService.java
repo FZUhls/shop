@@ -1,7 +1,10 @@
 package com.henry.shop.commodity.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.CommodityDto;
 import com.henry.shop.common.base.enumerate.PublishStatus;
+import com.henry.shop.common.base.exception.DataNotFoundException;
+import com.henry.shop.common.base.exception.ParamIllegalException;
 import com.henry.shop.common.base.model.dataobj.com.Commodity;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +22,46 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  */
 public interface CommodityService {
+    /**
+     * 创建商品
+     * @param commodityDto 商品dto
+     * @return 插入后的商品对象
+     */
     @Transactional(rollbackFor = Exception.class)
-    Commodity createCommodity(CommodityDto commodityDto);
+    Commodity createCommodity(CommodityDto commodityDto) throws DataNotFoundException, ParamIllegalException;
+
+    /**
+     * 更新商品
+     * @param id 被更新的商品的id
+     * @param commodityDto 商品dto
+     * @return 更新后的商品对象
+     */
     @Transactional(rollbackFor = Exception.class)
-    Commodity updateCommodity(long id,CommodityDto commodityDto);
+    Commodity updateCommodity(long id,CommodityDto commodityDto) throws DataNotFoundException;
+
+    /**
+     * 删除商品
+     * @param id
+     */
     @Transactional(rollbackFor = Exception.class)
     void deleteCommodity(long id);
+
+    /**
+     * 分页获取商品
+     * @param pageNo 页号
+     * @param size 分页大小
+     * @param keyWord 关键词
+     * @return 商品分页列表
+     */
     @Transactional(rollbackFor = Exception.class)
-    Commodity getCommoditys(long pageNo,long size,String keyWord);
+    Page<Commodity> getCommoditys(long pageNo, long size, String keyWord);
+
+    /**
+     * 更新商品状态
+     * @param id 商品id
+     * @param publishStatus 修改的目标状态
+     * @return 修改后的商品对象
+     */
     @Transactional(rollbackFor = Exception.class)
     Commodity updateCommodityPublishStatus(long id, PublishStatus publishStatus);
 }

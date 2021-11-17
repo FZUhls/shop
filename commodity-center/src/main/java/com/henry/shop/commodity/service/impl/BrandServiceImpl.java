@@ -6,7 +6,7 @@ import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.commodity.service.BrandService;
 import com.henry.shop.common.base.enumerate.BaseExceptionType;
 import com.henry.shop.common.base.exception.BaseException;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.mapper.com.BrandMapper;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 import lombok.extern.slf4j.Slf4j;
@@ -67,13 +67,13 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     @Transactional(readOnly = true)
-    public Brand findById(long id) throws DataBaseNotFoundException {
+    public Brand findById(long id) throws DataNotFoundException {
         log.info("根据id查询指定品牌，id = {}",id);
         Brand brand = brandMapper.selectById(id);
         log.info("查询结果为 = {}",JSON.toJSONString(brand));
         if(Objects.isNull(brand)){
             log.error("id = {} 的品牌不存在");
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         return brand;
     }

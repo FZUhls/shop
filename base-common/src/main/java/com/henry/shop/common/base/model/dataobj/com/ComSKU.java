@@ -36,22 +36,40 @@ public class ComSKU implements Serializable {
     @ApiModelProperty("sku价格")
     private BigDecimal price;
     /**
-     * 规格1
+     * 规格1的id
      */
-    @ApiModelProperty("规格1")
+    @ApiModelProperty("规格1的id")
     private Long variantId1;
 
     /**
-     * 规格2
+     * 规格2的id
      */
-    @ApiModelProperty("规格2")
+    @ApiModelProperty("规格2的id")
     private Long variantId2;
 
     /**
-     * 规格3
+     * 规格3的id
      */
-    @ApiModelProperty("规格3")
+    @ApiModelProperty("规格3的id")
     private Long variantId3;
+
+    /**
+     * 规格1的值
+     */
+    @ApiModelProperty("规格1的id")
+    private String  variantItem1;
+
+    /**
+     * 规格2的值
+     */
+    @ApiModelProperty("规格2的id")
+    private String  variantItem2;
+
+    /**
+     * 规格3的值
+     */
+    @ApiModelProperty("规格3的id")
+    private String variantItem3;
 
     /**
      * 数量

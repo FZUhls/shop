@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.ParamDto;
 import com.henry.shop.commodity.dto.req.ParamGroupDto;
 import com.henry.shop.commodity.service.ParamService;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.mapper.com.ComParamGroupMapper;
 import com.henry.shop.common.base.mapper.com.ComParamMapper;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
@@ -63,12 +63,12 @@ public class ParamServiceImpl implements ParamService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addParamToGroup(ParamDto paramDto) throws DataBaseNotFoundException {
+    public void addParamToGroup(ParamDto paramDto) throws DataNotFoundException {
         Long paramGroupId = paramDto.getParamGroupId();
         ComParamGroup comParamGroup = comParamGroupMapper.selectById(paramGroupId);
         if (Objects.isNull(comParamGroup)) {
             log.error("参数组不存在");
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         ComParam param = dtoToBo(paramDto);
         if(param.getSort() == 0){
@@ -81,12 +81,12 @@ public class ParamServiceImpl implements ParamService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void editParam(ParamDto paramDto,long id) throws DataBaseNotFoundException {
+    public void editParam(ParamDto paramDto,long id) throws DataNotFoundException {
         log.info("开始修改参数项,id = {} ，请求表单 = {}",id,JSON.toJSONString(paramDto));
         ComParam param = comParamMapper.selectById(id);
         if(Objects.isNull(param)){
             log.error("参数不存在");
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         param.setType(paramDto.getType());
         param.setName(paramDto.getName());
@@ -97,10 +97,10 @@ public class ParamServiceImpl implements ParamService {
     }
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void deleteParam(long id) throws DataBaseNotFoundException {
+    public void deleteParam(long id) throws DataNotFoundException {
         ComParam param = comParamMapper.selectById(id);
         if(Objects.isNull(param)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         Long paramGroupId = param.getParamGroupId();
         ComParamGroup comParamGroup = comParamGroupMapper.selectById(paramGroupId);
@@ -111,11 +111,11 @@ public class ParamServiceImpl implements ParamService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteParamGroup(Long id) throws DataBaseNotFoundException {
+    public void deleteParamGroup(Long id) throws DataNotFoundException {
         ComParamGroup comParamGroup = comParamGroupMapper.selectById(id);
         if (Objects.isNull(comParamGroup)) {
             log.error("参数组不存在");
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         comParamGroupMapper.deleteById(comParamGroup.getId());
         comParamMapper.deleteByGroupId(comParamGroup.getId());
@@ -124,12 +124,12 @@ public class ParamServiceImpl implements ParamService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void editParamGroup(ParamGroupDto paramGroupDto) throws DataBaseNotFoundException {
+    public void editParamGroup(ParamGroupDto paramGroupDto) throws DataNotFoundException {
         Long groupId = paramGroupDto.getId();
         ComParamGroup comParam = comParamGroupMapper.selectById(groupId);
         if (Objects.isNull(comParam)) {
             log.error("参数组不存在");
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         comParam.setId(groupId);
         comParam.setUpdTime(new Date());
@@ -150,5 +150,14 @@ public class ParamServiceImpl implements ParamService {
     public List<ComParam> getParams(long groupId) {
         List<ComParam> params = comParamMapper.selectByGroupId(groupId);
         return params;
+    }
+
+    @Override
+    public ComParam selectParamById(long id) throws DataNotFoundException{
+        ComParam comParam = comParamMapper.selectById(id);
+        if(Objects.isNull(comParam)){
+            throw new DataNotFoundException();
+        }
+        return comParam;
     }
 }

@@ -3,7 +3,7 @@ package com.henry.shop.commodity.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.BrandDto;
 import com.henry.shop.common.base.exception.BaseException;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public interface BrandService {
      * @param id 品牌id
      * @return Brand id对应的品牌
      */
-    Brand findById(long id) throws DataBaseNotFoundException;
+    Brand findById(long id) throws DataNotFoundException;
 
     /**
      * 根据id更新品牌

@@ -3,7 +3,7 @@ package com.henry.shop.commodity.service.impl;
 import com.henry.shop.commodity.dto.req.VariantDto;
 import com.henry.shop.commodity.dto.req.VariantGroupDto;
 import com.henry.shop.commodity.service.VariantService;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.mapper.com.ComVariantGroupMapper;
 import com.henry.shop.common.base.mapper.com.ComVariantMapper;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
@@ -22,19 +22,19 @@ public class VariantServiceImpl implements VariantService {
     @Autowired
     ComVariantMapper comVariantMapper;
     @Override
-    public ComVariantGroup getVariantGroupById(long groupId) throws DataBaseNotFoundException {
+    public ComVariantGroup getVariantGroupById(long groupId) throws DataNotFoundException {
         ComVariantGroup variantGroup = comVariantGroupMapper.selectById(groupId);
         if(Objects.isNull(variantGroup)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         return variantGroup;
     }
 
     @Override
-    public ComVariant getVariantById(long id) throws DataBaseNotFoundException {
+    public ComVariant getVariantById(long id) throws DataNotFoundException {
         ComVariant variant = comVariantMapper.selectById(id);
         if(Objects.isNull(variant)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         return variant;
     }
@@ -65,10 +65,10 @@ public class VariantServiceImpl implements VariantService {
     }
 
     @Override
-    public ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataBaseNotFoundException {
+    public ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataNotFoundException {
         ComVariantGroup variantGroup = comVariantGroupMapper.selectById(id);
         if(Objects.isNull(variantGroup)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         variantGroup.setName(variantGroup.getName());
         variantGroup.setUpdTime(new Date());
@@ -77,10 +77,10 @@ public class VariantServiceImpl implements VariantService {
     }
 
     @Override
-    public ComVariant updateVariant(long id, VariantDto variantDto) throws DataBaseNotFoundException {
+    public ComVariant updateVariant(long id, VariantDto variantDto) throws DataNotFoundException {
         ComVariant variant = comVariantMapper.selectById(id);
         if(Objects.isNull(variant)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         variant.setName(variantDto.getName());
         variant.setGroupId(variant.getGroupId());
@@ -90,20 +90,20 @@ public class VariantServiceImpl implements VariantService {
     }
 
     @Override
-    public void deleteVariantGroup(long id) throws DataBaseNotFoundException {
+    public void deleteVariantGroup(long id) throws DataNotFoundException {
         ComVariantGroup variantGroup = comVariantGroupMapper.selectById(id);
         if(Objects.isNull(variantGroup)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         comVariantGroupMapper.deleteById(id);
         comVariantMapper.deleteByGroupId(id,variantGroup.getVariantNumber());
     }
 
     @Override
-    public void deleteVariant(long id) throws DataBaseNotFoundException {
+    public void deleteVariant(long id) throws DataNotFoundException {
         ComVariant variant = comVariantMapper.selectById(id);
         if(Objects.isNull(variant)){
-            throw new DataBaseNotFoundException();
+            throw new DataNotFoundException();
         }
         Long groupId = variant.getGroupId();
         ComVariantGroup variantGroup = comVariantGroupMapper.selectById(groupId);

@@ -2,7 +2,7 @@ package com.henry.shop.commodity.service;
 
 import com.henry.shop.commodity.dto.req.VariantDto;
 import com.henry.shop.commodity.dto.req.VariantGroupDto;
-import com.henry.shop.common.base.exception.DataBaseNotFoundException;
+import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,17 +29,17 @@ public interface VariantService {
      * 根据id获取规格组
      * @param groupId 规格组id
      * @return ComVariantGroup规格组
-     * @throws DataBaseNotFoundException 查询不到时抛出异常
+     * @throws DataNotFoundException 查询不到时抛出异常
      */
-    ComVariantGroup getVariantGroupById(long groupId) throws DataBaseNotFoundException;
+    ComVariantGroup getVariantGroupById(long groupId) throws DataNotFoundException;
 
     /**
      * 根据id获取规格
      * @param id 规格id
      * @return ComVariantGroup
-     * @throws DataBaseNotFoundException 查询不到时抛出异常
+     * @throws DataNotFoundException 查询不到时抛出异常
      */
-    ComVariant getVariantById(long id) throws DataBaseNotFoundException;
+    ComVariant getVariantById(long id) throws DataNotFoundException;
 
     /**
      * 添加规格组
@@ -60,31 +60,31 @@ public interface VariantService {
      * @param id 规格组id
      * @param variantGroupDto 规格组dto
      * @return 修改后的规格组
-     * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
+     * @throws DataNotFoundException 不存在指定id的规格组时抛出异常
      */
     @Transactional(rollbackFor = Exception.class)
-    ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataBaseNotFoundException;
+    ComVariantGroup updateVariantGroup(long id, VariantGroupDto variantGroupDto) throws DataNotFoundException;
 
     /**
      * @param id 规格id
      * @param variantDto 规格dto
      * @return 修改后的规格
-     * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
+     * @throws DataNotFoundException 不存在指定id的规格组时抛出异常
      */
     @Transactional(rollbackFor = Exception.class)
-    ComVariant updateVariant(long id,VariantDto variantDto) throws DataBaseNotFoundException;
+    ComVariant updateVariant(long id,VariantDto variantDto) throws DataNotFoundException;
 
     /**
      * @param id 规格组id
-     * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
+     * @throws DataNotFoundException 不存在指定id的规格组时抛出异常
      */
     @Transactional(rollbackFor = Exception.class)
-    void deleteVariantGroup(long id) throws DataBaseNotFoundException;
+    void deleteVariantGroup(long id) throws DataNotFoundException;
 
     /**
      * @param id 规格组id
-     * @throws DataBaseNotFoundException 不存在指定id的规格组时抛出异常
+     * @throws DataNotFoundException 不存在指定id的规格组时抛出异常
      */
     @Transactional(rollbackFor = Exception.class)
-    void deleteVariant(long id) throws DataBaseNotFoundException;
+    void deleteVariant(long id) throws DataNotFoundException;
 }

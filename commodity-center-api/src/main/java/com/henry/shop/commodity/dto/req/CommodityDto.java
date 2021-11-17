@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商品添加表单
@@ -41,13 +40,11 @@ public class CommodityDto implements Serializable {
     private Long brandId;
 
     /**
-     * 规格map
-     */
-    @ApiModelProperty("规格map")
-    private Map<Long,String> variantMap;
-    /**
      * sku 列表
      */
     @ApiModelProperty("sku列表")
     private List<SkuDto> skuDtoList;
+
+    @ApiModelProperty("属性列表")
+    private List<ParamItemDto> paramItemDtoList;
 }
