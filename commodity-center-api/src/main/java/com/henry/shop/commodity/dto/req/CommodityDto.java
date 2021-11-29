@@ -31,7 +31,7 @@ public class CommodityDto implements Serializable {
      * 规格组id
      */
     @ApiModelProperty("规格组id")
-    private Long variantGropuId;
+    private Long variantGroupId;
 
     /**
      * 品牌id

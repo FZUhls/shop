@@ -26,6 +26,8 @@ public interface CommodityService {
      * 创建商品
      * @param commodityDto 商品dto
      * @return 插入后的商品对象
+     * @throws DataNotFoundException 插入商品所属的分类或品牌不存在
+     * @throws ParamIllegalException 参数错误
      */
     @Transactional(rollbackFor = Exception.class)
     Commodity createCommodity(CommodityDto commodityDto) throws DataNotFoundException, ParamIllegalException;
@@ -35,6 +37,7 @@ public interface CommodityService {
      * @param id 被更新的商品的id
      * @param commodityDto 商品dto
      * @return 更新后的商品对象
+     * @throws DataNotFoundException 更新商品的品牌、分类或被更新项不存在
      */
     @Transactional(rollbackFor = Exception.class)
     Commodity updateCommodity(long id,CommodityDto commodityDto) throws DataNotFoundException;
