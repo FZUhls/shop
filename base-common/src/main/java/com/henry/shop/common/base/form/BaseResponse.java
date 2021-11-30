@@ -26,7 +26,16 @@ public class BaseResponse<T> implements Serializable {
     @ApiModelProperty("响应消息")
     protected String msg;
 
-    @ApiModelProperty("响应消息")
+    /**
+     * 错误代码
+     */
+    @ApiModelProperty("错误代码")
+    protected String errCode;
+
+    /**
+     * 响应内容
+     */
+    @ApiModelProperty("响应内容")
     protected T data;
 
 
@@ -50,7 +59,7 @@ public class BaseResponse<T> implements Serializable {
         response.setMsg(Code.SUCCESS.getDescription());
         return response;
     }
-    public static BaseResponse systemError(){
+    public static BaseResponse error(){
         BaseResponse response = new BaseResponse();
         response.setCode(Code.SYSTEM_ERROR);
         response.setMsg(Code.SYSTEM_ERROR.getDescription());

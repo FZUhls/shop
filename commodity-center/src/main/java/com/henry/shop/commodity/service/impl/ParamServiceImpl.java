@@ -110,6 +110,16 @@ public class ParamServiceImpl implements ParamService {
     }
 
     @Override
+    public ComParamGroup selectParamGroupById(long id) throws DataNotFoundException {
+        ComParamGroup comParamGroup = comParamGroupMapper.selectById(id);
+        if(comParamGroup == null){
+            throw new DataNotFoundException();
+        }else {
+            return comParamGroup;
+        }
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteParamGroup(Long id) throws DataNotFoundException {
         ComParamGroup comParamGroup = comParamGroupMapper.selectById(id);

@@ -37,7 +37,7 @@ public interface ParamRestService {
      * @param id
      */
     @DeleteMapping(DELETE_PARAM_GROUP)
-    BaseResponse deleteParamGroup(@PathVariable("id") Long id) throws DataNotFoundException;
+    BaseResponse deleteParamGroup(@PathVariable("id") Long id);
 
 
     /**
@@ -47,7 +47,7 @@ public interface ParamRestService {
      * @throws DataNotFoundException
      */
     @PutMapping(UPDATE_PARAM_GROUP)
-    BaseResponse editParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto) throws DataNotFoundException;
+    BaseResponse editParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto);
 
 
     /**
@@ -70,7 +70,7 @@ public interface ParamRestService {
      * @param paramDto
      */
     @PostMapping(CREATE_PARAM)
-    BaseResponse addParamToGroup(@RequestBody ParamDto paramDto) throws DataNotFoundException;
+    BaseResponse addParamToGroup(@RequestBody ParamDto paramDto);
 
     /**
      * 修改参数组
@@ -78,13 +78,13 @@ public interface ParamRestService {
      * @throws DataNotFoundException
      */
     @PutMapping(UPDATE_PARAM)
-    BaseResponse editParam(@RequestBody ParamDto paramDto,@PathVariable("id") long id) throws DataNotFoundException;
+    BaseResponse editParam(@RequestBody ParamDto paramDto,@PathVariable("id") long id);
 
     /**
      * @param id
      * @throws DataNotFoundException
      */
     @DeleteMapping(DELETE_PARAM)
-    BaseResponse deleteParam(@PathVariable("id") long id) throws DataNotFoundException;
+    BaseResponse deleteParam(@PathVariable("id") long id);
 
 }

@@ -69,7 +69,7 @@ public class CommodityServiceImpl implements CommodityService {
         commodityOld.setUpdTime(new Date());
         commodityOld.setName(commodityDto.getName());
         commodityOld.setBrandId(commodityDto.getBrandId());
-        commodityOld.setVariantGroupId(commodityDto.getVariantGropuId());
+        commodityOld.setVariantGroupId(commodityDto.getVariantGroupId());
         commodityOld.setImageUrl("");
         return null;
     }
@@ -141,6 +141,7 @@ public class CommodityServiceImpl implements CommodityService {
             ComSKU sku = new ComSKU();
             BeanUtils.copyProperties(skuDto,sku);
             sku.setPrice(new BigDecimal(skuDto.getPrice()));
+            sku.setCommodityId(commodityId);
             comSKUMapper.insert(sku);
         }
     }

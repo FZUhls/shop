@@ -67,6 +67,7 @@ public interface ParamService {
      */
     void deleteParam(long id) throws DataNotFoundException;
 
+    ComParamGroup selectParamGroupById(long id) throws DataNotFoundException;
     /**
      * @param param 参数对象
      * @param value 参数内容

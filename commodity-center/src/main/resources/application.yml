@@ -12,7 +12,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true #开启自动驼峰命名规则映射
 swagger:
   title: shop-customer-center
-  description: 顾客中心接口文档
+  description: 商品中心接口文档
   version: 1.0.0
   basePackage: com.henry.shop.customer
   contact:

@@ -12,7 +12,7 @@ public class JsonTest extends BaseTest {
     ObjectMapper objectMapper;
     @Test
     void test1() throws JsonProcessingException {
-        String s = objectMapper.writeValueAsString(BaseResponse.systemError());
+        String s = objectMapper.writeValueAsString(BaseResponse.error());
         System.out.println(s);
     }
 }

@@ -9,7 +9,6 @@ import com.henry.shop.business.commodity.vo.req.ParamGroupEditReq;
 import com.henry.shop.commodity.api.ParamRestService;
 import com.henry.shop.commodity.dto.req.ParamDto;
 import com.henry.shop.commodity.dto.req.ParamGroupDto;
-import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
 import com.henry.shop.common.base.model.dataobj.com.ComParamGroup;
@@ -31,7 +30,7 @@ import java.util.List;
 @Api(value = "参数管理",tags = "商品管理--参数")
 @RestController
 public class ParamController {
-    public static final String BASE_URI = "/param";
+    private static final String BASE_URI = "/param";
     private static final String ADD_GROUP = BASE_URI + "/add-group";
     private static final String UPDATE_GROUP = BASE_URI + "/update-group/{id}";
     private static final String DELETE_GROUP = BASE_URI + "/delete-group/{id}";
@@ -56,7 +55,7 @@ public class ParamController {
     }
     @PutMapping(UPDATE_GROUP)
     @ApiOperation(value = "更新参数组")
-    public BaseResponse updateParamGroup(ParamGroupEditReq req, @PathVariable long id) throws DataNotFoundException {
+    public BaseResponse updateParamGroup(ParamGroupEditReq req, @PathVariable long id){
         String name = req.getName();
         ParamGroupDto paramGroupDto = new ParamGroupDto();
         paramGroupDto.setId(id);
@@ -65,7 +64,7 @@ public class ParamController {
     }
     @DeleteMapping(DELETE_GROUP)
     @ApiOperation(value = "删除参数组")
-    public BaseResponse deleteParamGroup(@PathVariable long id) throws DataNotFoundException {
+    public BaseResponse deleteParamGroup(@PathVariable long id){
         paramService.deleteParamGroup(id);
         return BaseResponse.succ();
     }
@@ -78,7 +77,7 @@ public class ParamController {
     }
     @PostMapping(ADD_PARAM)
     @ApiOperation("添加参数项")
-    public BaseResponse addParam(ParamAddReq req) throws DataNotFoundException {
+    public BaseResponse addParam(ParamAddReq req){
         ParamDto paramDto = new ParamDto();
         paramDto.setParamGroupId(req.getGroupId());
         paramDto.setName(req.getName());
@@ -90,7 +89,7 @@ public class ParamController {
     @PutMapping(UPDATE_PARAM)
     @ApiOperation("修改参数项")
     @ApiImplicitParam(name = "id",value = "参数id")
-    public BaseResponse updateParam(ParamEditReq req, @PathVariable long id) throws DataNotFoundException {
+    public BaseResponse updateParam(ParamEditReq req, @PathVariable long id){
         ParamDto paramDto = new ParamDto();
         paramDto.setName(req.getName());
         paramDto.setType(req.getType());
@@ -101,7 +100,7 @@ public class ParamController {
     @DeleteMapping(DELETE_PARAM)
     @ApiOperation("删除参数项")
     @ApiImplicitParam(name = "id",value = "参数id")
-    public BaseResponse deleteParam(@PathVariable long id) throws DataNotFoundException {
+    public BaseResponse deleteParam(@PathVariable long id){
         return paramService.deleteParam(id);
     }
     @GetMapping(SELETE_PARAM)
