@@ -49,18 +49,18 @@ public class SkuDto {
     /**
      * 规格1的值
      */
-    @ApiModelProperty("规格1的id")
+    @ApiModelProperty("规格1")
     private String  variantItem1;
 
     /**
      * 规格2的值
      */
-    @ApiModelProperty("规格2的id")
+    @ApiModelProperty("规格2")
     private String  variantItem2;
 
     /**
      * 规格3的值
      */
-    @ApiModelProperty("规格3的id")
+    @ApiModelProperty("规格3")
     private String variantItem3;
 }

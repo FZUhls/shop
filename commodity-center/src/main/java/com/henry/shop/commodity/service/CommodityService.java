@@ -2,6 +2,7 @@ package com.henry.shop.commodity.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.CommodityDto;
+import com.henry.shop.commodity.dto.res.CommodityRes;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.exception.ParamIllegalException;
@@ -48,6 +49,12 @@ public interface CommodityService {
      */
     @Transactional(rollbackFor = Exception.class)
     void deleteCommodity(long id);
+
+    /**
+     * @param id 商品id
+     * @return
+     */
+    CommodityRes selectById(long id) throws DataNotFoundException;
 
     /**
      * 分页获取商品

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.CommodityDto;
 import com.henry.shop.commodity.dto.req.ParamItemDto;
 import com.henry.shop.commodity.dto.req.SkuDto;
+import com.henry.shop.commodity.dto.res.CommodityRes;
 import com.henry.shop.commodity.service.CategoryService;
 import com.henry.shop.commodity.service.CommodityService;
 import com.henry.shop.commodity.service.ParamService;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Henry
@@ -76,6 +78,16 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public void deleteCommodity(long id) {
+
+    }
+
+    @Override
+    public CommodityRes selectById(long id) throws DataNotFoundException {
+        Commodity commodity = commodityMapper.selectById(id);
+        Map<String, Map<String, String>> paramGroupMap = getParamGroupMap(commodity.getId(), commodity.getCategoryId());
+        CommodityRes commodityRes = new CommodityRes();
+        BeanUtils.copyProperties(commodity,commodityRes);
+        commodityRes.setParamMap(paramGroupMap);
 
     }
 
@@ -139,10 +151,36 @@ public class CommodityServiceImpl implements CommodityService {
     private void createSku(List<SkuDto> skuDtoList,long commodityId){
         for(SkuDto skuDto : skuDtoList){
             ComSKU sku = new ComSKU();
+
             BeanUtils.copyProperties(skuDto,sku);
             sku.setPrice(new BigDecimal(skuDto.getPrice()));
             sku.setCommodityId(commodityId);
             comSKUMapper.insert(sku);
         }
+    }
+
+    private Map<String,Map<String,String>> getParamGroupMap(long commodityId, long categoryId) throws DataNotFoundException {
+        List<CategoryParamGroupRelation> categoryParamGroupRelations = categoryService.selectRelationByCategoryId(commodity.getCategoryId());
+        Map<String,Map<String ,String>> paramGroupMap = new HashMap<>();
+        List<ComParamItem> paramItems = comParamItemMapper.selectByCommodityId(commodityId);
+        Map<Long,String> itemMap = new HashMap<>();
+        for(ComParamItem item : paramItems){
+            itemMap.put(item.getParamId(),item.getParamValue());
+        }
+        for(CategoryParamGroupRelation relation : categoryParamGroupRelations){
+            Long paramGroupId = relation.getParamGroupId();
+            String groupName;
+            String alias = relation.getAlias();
+            if(alias.isBlank()){
+                ComParamGroup comParamGroup = paramService.selectParamGroupById(paramGroupId);
+                groupName = comParamGroup.getName();
+            }else {
+                groupName = alias;
+            }
+            List<ComParam> params = paramService.getParams(paramGroupId);
+            Map<String, String> paramMap = params.stream().collect(Collectors.toMap(param -> param.getName(), param -> itemMap.get(param.getId())));
+            paramGroupMap.put(groupName,paramMap);
+        }
+        return paramGroupMap;
     }
 }

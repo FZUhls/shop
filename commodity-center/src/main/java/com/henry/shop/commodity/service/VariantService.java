@@ -3,6 +3,7 @@ package com.henry.shop.commodity.service;
 import com.henry.shop.commodity.dto.req.VariantDto;
 import com.henry.shop.commodity.dto.req.VariantGroupDto;
 import com.henry.shop.common.base.exception.DataNotFoundException;
+import com.henry.shop.common.base.exception.VariantException;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +55,7 @@ public interface VariantService {
      * @return 创建成功的结果
      */
     @Transactional(rollbackFor = Exception.class)
-    ComVariant createVariant(VariantDto variantDto);
+    ComVariant createVariant(VariantDto variantDto) throws DataNotFoundException, VariantException;
 
     /**
      * @param id 规格组id

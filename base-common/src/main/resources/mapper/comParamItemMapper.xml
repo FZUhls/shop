@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henry.shop.common.base.mapper.com.ComParamItemMapper">
+    <select id="selectByCommodityId" resultType="com.henry.shop.common.base.model.dataobj.com.ComParamItem">
+        select id,param_id,commodity_id,param_value,cre_time,upd_time from com_param_item
+        where commodity_id = #{comId}
+    </select>
+</mapper>

@@ -20,9 +20,9 @@ public enum Code implements Enumerator{
      */
     FAIL(300,"请求失败"),
     /**
-     * 系统错误
+     * 请求错误
      */
-    SYSTEM_ERROR(500,"系统错误");
+    SYSTEM_ERROR(500,"请求错误");
 
     @JsonValue
     private final Integer code;

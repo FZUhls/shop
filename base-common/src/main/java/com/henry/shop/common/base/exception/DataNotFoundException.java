@@ -8,4 +8,7 @@ public class DataNotFoundException extends Exception{
    public DataNotFoundException(){
        super("数据不存在");
    }
+   public DataNotFoundException(String msg){
+       super(msg);
+   }
 }
