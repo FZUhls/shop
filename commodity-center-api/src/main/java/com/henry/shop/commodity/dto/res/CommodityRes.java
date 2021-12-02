@@ -11,7 +11,6 @@ import java.util.Map;
  */
 @Data
 public class CommodityRes {
-
     private Long id;
     /**
      * 商品名
@@ -21,11 +20,6 @@ public class CommodityRes {
      * 类别id
      */
     private Long categoryId;
-
-    /**
-     * 规格名
-     */
-    private String categoryName;
 
     /**
      * 参数组id对应表

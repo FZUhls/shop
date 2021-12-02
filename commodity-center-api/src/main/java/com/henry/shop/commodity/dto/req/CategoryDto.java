@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author Henry
@@ -15,7 +16,7 @@ public class CategoryDto implements Serializable {
     /**
      * 父类id
      */
-    @ApiModelProperty("父类id")
+    @ApiModelProperty(value = "父类id",notes = "不指定父类的时候默认为一级分类")
     private Long parantId;
     /**
      * 名称
@@ -25,6 +26,6 @@ public class CategoryDto implements Serializable {
     /**
      * 参数组id
      */
-    @ApiModelProperty("参数组id")
-    private String paramGroupId;
+    @ApiModelProperty("关联的参数组与别名")
+    private Map<Long,String > paramGroupMap;
 }

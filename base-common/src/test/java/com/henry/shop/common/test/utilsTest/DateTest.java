@@ -2,12 +2,13 @@ package com.henry.shop.common.test.utilsTest;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class DateTest {
     @Test
     void test(){
-        Class<Integer> type = int.class;
-        Class<Integer> type2 = Integer.class;
-        System.out.println(type.getName());
-        System.out.println(type2.getName());
-     }
+        List<String> urlList = List.of("http://www.baidu.com","http://www.taobao.com","http://www.zhihu.com");
+        String urls = String.join(",", urlList);
+        System.out.println(urls);
+    }
 }

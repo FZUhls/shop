@@ -2,7 +2,10 @@ package com.henry.shop.commodity.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.henry.shop.commodity.dto.req.CommodityDto;
+import com.henry.shop.commodity.dto.req.CommodityUpdDto;
+import com.henry.shop.commodity.dto.req.SkuUpdDto;
 import com.henry.shop.commodity.dto.res.CommodityRes;
+import com.henry.shop.commodity.dto.res.CommodityShortRes;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.exception.ParamIllegalException;
@@ -13,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 商品service
  * <ul>
  *     <li>商品增加 {@link #createCommodity(CommodityDto)}</li>
- *     <li>商品更新 {@link #updateCommodity(long, CommodityDto)}</li>
+ *     <li>商品更新 {@link #updateCommodity(long, CommodityUpdDto)} (long, CommodityDto)}</li>
+ *     <li>商品状态更新 {@link #updateCommodityPublishStatus(long, PublishStatus)}</li>
  *     <li>删除商品 {@link #deleteCommodity(long)}</li>
  *     <li>分页查询商品 {@link #getCommoditys(long, long, String)}</li>
  *     <li>商品状态改变 {@link #updateCommodityPublishStatus(long, PublishStatus)} </li>
@@ -36,23 +40,30 @@ public interface CommodityService {
     /**
      * 更新商品
      * @param id 被更新的商品的id
-     * @param commodityDto 商品dto
+     * @param commodityUpdDto 商品更新dto
      * @return 更新后的商品对象
      * @throws DataNotFoundException 更新商品的品牌、分类或被更新项不存在
      */
     @Transactional(rollbackFor = Exception.class)
-    Commodity updateCommodity(long id,CommodityDto commodityDto) throws DataNotFoundException;
+    Commodity updateCommodity(long id, CommodityUpdDto commodityUpdDto) throws DataNotFoundException;
 
     /**
-     * 删除商品
-     * @param id
+     * @param skuUpdDto sku 更新 dto
      */
     @Transactional(rollbackFor = Exception.class)
-    void deleteCommodity(long id);
+    void updateSku(SkuUpdDto skuUpdDto);
 
     /**
      * @param id 商品id
-     * @return
+     * @throws DataNotFoundException 商品不存在时抛出
+     */
+    @Transactional(rollbackFor = Exception.class)
+    void deleteCommodity(long id) throws DataNotFoundException;
+
+    /**
+     * @param id 商品id
+     * @return 商品信息
+     * @throws DataNotFoundException 商品不存在时抛出
      */
     CommodityRes selectById(long id) throws DataNotFoundException;
 
@@ -64,7 +75,7 @@ public interface CommodityService {
      * @return 商品分页列表
      */
     @Transactional(rollbackFor = Exception.class)
-    Page<Commodity> getCommoditys(long pageNo, long size, String keyWord);
+    Page<CommodityShortRes> getCommoditys(long pageNo, long size, String keyWord);
 
     /**
      * 更新商品状态
@@ -73,5 +84,5 @@ public interface CommodityService {
      * @return 修改后的商品对象
      */
     @Transactional(rollbackFor = Exception.class)
-    Commodity updateCommodityPublishStatus(long id, PublishStatus publishStatus);
+    Commodity updateCommodityPublishStatus(long id, PublishStatus publishStatus) throws DataNotFoundException;
 }

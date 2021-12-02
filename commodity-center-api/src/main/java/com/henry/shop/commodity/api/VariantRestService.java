@@ -7,6 +7,9 @@ import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 /**
  * 商品规格管理接口
  * @author Henry
@@ -18,6 +21,7 @@ public interface VariantRestService {
     String CREATE = BASE_URL + "/create";
     String FIND_VARIANT = BASE_URL + "/findVariant/{id}";
     String FIND_VARIANT_GROUP = BASE_URL + "/findGroup/{id}";
+    String FIND_VARIANTS_IN_GROUP = BASE_URL + "findVariants/{groupId}";
     String UPDATE_VARIANT = BASE_URL + "/update/{id}";
     String UPDATE_GROUP = BASE_URL + "/updateGroup/{id}";
     String DELETE = BASE_URL + "/delete/{id}";
@@ -33,6 +37,9 @@ public interface VariantRestService {
 
     @GetMapping(FIND_VARIANT_GROUP)
     BaseResponse<ComVariantGroup> selectGroup(@PathVariable("id") long id);
+
+    @GetMapping(FIND_VARIANTS_IN_GROUP)
+    BaseResponse<List<ComVariant>> selectVariantByGroupId(@PathVariable("groupId") long groupId);
 
     @PutMapping(UPDATE_VARIANT)
     BaseResponse<ComVariant> updateVariant(@PathVariable("id") long id, @RequestBody VariantDto variantDto);

@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -30,6 +32,11 @@ public class VariantServiceImpl implements VariantService {
             throw new DataNotFoundException();
         }
         return variantGroup;
+    }
+
+    @Override
+    public List<ComVariant> getVariantsByGroupId(long groupId) {
+        return comVariantMapper.selectByMap(Map.of("group_id",groupId));
     }
 
     @Override
@@ -118,5 +125,10 @@ public class VariantServiceImpl implements VariantService {
         variantGroup.setVariantNumber(variantGroup.getVariantNumber() - 1);
         comVariantGroupMapper.updateById(variantGroup);
         comVariantMapper.deleteById(id);
+    }
+
+    @Override
+    public List<ComVariant> getVariantByGroupId(long groupId) {
+        return comVariantMapper.selectByMap(Map.of("group_id",groupId));
     }
 }

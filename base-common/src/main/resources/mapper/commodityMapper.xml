@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henry.shop.common.base.mapper.com.CommodityMapper">
+    <select id="getByPage" resultType="com.henry.shop.common.base.model.dataobj.com.Commodity">
+        select id,name,category_id,variant_group_id,brand_id,image_url,publish_status,cre_time,upd_time from com_commodity
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like CONCAT(CONCAT('%', #{keyword}), '%')
+            </if>
+        </where>
+    </select>
+</mapper>

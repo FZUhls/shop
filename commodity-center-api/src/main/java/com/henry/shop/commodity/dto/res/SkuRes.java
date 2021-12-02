@@ -30,4 +30,10 @@ public class SkuRes {
      * 规格列表
      */
     private Map<Long,String> variantMap;
+
+    /**
+     * 数量
+     */
+    @ApiModelProperty("sku 数量")
+    private Integer skuNumber;
 }

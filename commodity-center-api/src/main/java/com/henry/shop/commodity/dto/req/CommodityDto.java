@@ -45,6 +45,14 @@ public class CommodityDto implements Serializable {
     @ApiModelProperty("sku列表")
     private List<SkuDto> skuDtoList;
 
+    /**
+     * 图片地址
+     */
+    @ApiModelProperty("图片地址")
+    private List<String> imageUrls;
+    /**
+     * 属性列表
+     */
     @ApiModelProperty("属性列表")
     private List<ParamItemDto> paramItemDtoList;
 }

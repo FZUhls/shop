@@ -4,12 +4,15 @@ import com.henry.shop.commodity.dto.req.VariantDto;
 import com.henry.shop.commodity.dto.req.VariantGroupDto;
 import com.henry.shop.commodity.service.VariantService;
 import com.henry.shop.common.base.exception.DataNotFoundException;
+import com.henry.shop.common.base.exception.VariantException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 商品规格controller
@@ -25,6 +28,7 @@ public class VariantRestController {
     private static final String CREATE_GROUP = BASE_URL + "/createGroup";
     private static final String CREATE = BASE_URL + "/create";
     private static final String FIND_VARIANT = BASE_URL + "/findVariant/{id}";
+    private static final String FIND_VARIANTS_IN_GROUP = BASE_URL + "findVariants/{groupId}";
     private static final String FIND_VARIANT_GROUP = BASE_URL + "/findGroup/{id}";
     private static final String UPDATE_VARIANT = BASE_URL + "/update/{id}";
     private static final String UPDATE_GROUP = BASE_URL + "/updateGroup/{id}";
@@ -37,8 +41,15 @@ public class VariantRestController {
     }
     @PostMapping(CREATE)
     public BaseResponse createVariant(@RequestBody VariantDto variantDto){
-        variantService.createVariant(variantDto);
-        return BaseResponse.succ();
+        try {
+            variantService.createVariant(variantDto);
+            return BaseResponse.succ();
+        } catch (DataNotFoundException | VariantException e) {
+            e.printStackTrace();
+            BaseResponse response = BaseResponse.fail();
+            response.setMsg(e.getLocalizedMessage());
+            return response;
+        }
     }
     @GetMapping(FIND_VARIANT)
     public BaseResponse<ComVariant> selectVariant(@PathVariable("id") long id){
@@ -54,6 +65,19 @@ public class VariantRestController {
             return response;
         }
     }
+
+    /**
+     * @param groupId 根据规格组id查询组内规格
+     * @return 组内规格
+     */
+    @GetMapping(FIND_VARIANTS_IN_GROUP)
+    public BaseResponse<List<ComVariant>> selectVariantByGroupId(@PathVariable("groupId") long groupId){
+        List<ComVariant> variants = variantService.getVariantByGroupId(groupId);
+        BaseResponse succ = BaseResponse.succ();
+        succ.setData(variants);
+        return succ;
+    }
+
     @GetMapping(FIND_VARIANT_GROUP)
     public BaseResponse<ComVariantGroup> selectGroup(@PathVariable("id") long id){
         try {

@@ -1,14 +1,11 @@
 package com.henry.shop.commodity.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.henry.shop.commodity.dto.req.CommodityDto;
-import com.henry.shop.commodity.dto.req.ParamItemDto;
-import com.henry.shop.commodity.dto.req.SkuDto;
+import com.henry.shop.commodity.dto.req.*;
 import com.henry.shop.commodity.dto.res.CommodityRes;
-import com.henry.shop.commodity.service.CategoryService;
-import com.henry.shop.commodity.service.CommodityService;
-import com.henry.shop.commodity.service.ParamService;
-import com.henry.shop.commodity.service.VariantService;
+import com.henry.shop.commodity.dto.res.CommodityShortRes;
+import com.henry.shop.commodity.dto.res.SkuRes;
+import com.henry.shop.commodity.service.*;
 import com.henry.shop.common.base.enumerate.ParamType;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.exception.ParamIllegalException;
@@ -24,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -44,6 +42,8 @@ public class CommodityServiceImpl implements CommodityService {
     ParamService paramService;
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    BrandService brandService;
     @Override
     public Commodity createCommodity(CommodityDto commodityDto) throws DataNotFoundException, ParamIllegalException {
         Commodity commodity = new Commodity();
@@ -63,42 +63,84 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public Commodity updateCommodity(long id, CommodityDto commodityDto) throws DataNotFoundException {
+    public Commodity updateCommodity(long id, CommodityUpdDto commodityUpdDto) throws DataNotFoundException {
         Commodity commodityOld = commodityMapper.selectById(id);
         if(Objects.isNull(commodityOld)){
             throw new DataNotFoundException();
         }
+        commodityOld.setName(commodityUpdDto.getName());
+        String url = String.join(",",commodityUpdDto.getImageUrls());
+        commodityOld.setImageUrl(url);
         commodityOld.setUpdTime(new Date());
-        commodityOld.setName(commodityDto.getName());
-        commodityOld.setBrandId(commodityDto.getBrandId());
-        commodityOld.setVariantGroupId(commodityDto.getVariantGroupId());
-        commodityOld.setImageUrl("");
-        return null;
+        commodityMapper.updateById(commodityOld);
+        if(commodityUpdDto.isNewVariant()){
+            log.info("更新商品时添加的新的规格，开始存入新的sku");
+            createSku(commodityUpdDto.getNewSkuDtoList(),id);
+        }
+        return commodityOld;
     }
 
     @Override
-    public void deleteCommodity(long id) {
+    public void updateSku(SkuUpdDto skuUpdDto) {
+        Long commodityId = skuUpdDto.getCommodityId();
+        List<SkuUpdItem> updItems = skuUpdDto.getUpdItems();
+        Map<Long, SkuUpdItem> skuUpdItemMap = updItems.stream().collect(Collectors.toMap(SkuUpdItem::getId, Function.identity()));
+        List<ComSKU> comSKUList = comSKUMapper.selectByMap(Map.of("commodity_id",commodityId));
+        comSKUList.forEach(sku->{
+            SkuUpdItem updItem = skuUpdItemMap.get(sku.getId());
+            sku.setPrice(new BigDecimal(updItem.getPrice()));
+            sku.setSkuNumber(updItem.getSkuNumber());
+            comSKUMapper.updateById(sku);
+        });
+    }
 
+    @Override
+    public void deleteCommodity(long id) throws DataNotFoundException {
+        Commodity commodity = commodityMapper.selectById(id);
+        if(Objects.isNull(commodity)){
+            throw new DataNotFoundException();
+        }
+        commodityMapper.deleteById(id);
+        List<ComSKU> skus = comSKUMapper.selectByMap(Map.of("commodity_id", id));
+        comSKUMapper.deleteBatchIds(skus.stream().map(ComSKU::getId).collect(Collectors.toList()));
     }
 
     @Override
     public CommodityRes selectById(long id) throws DataNotFoundException {
         Commodity commodity = commodityMapper.selectById(id);
+        if(Objects.isNull(commodity)){
+            throw new DataNotFoundException();
+        }
         Map<String, Map<String, String>> paramGroupMap = getParamGroupMap(commodity.getId(), commodity.getCategoryId());
         CommodityRes commodityRes = new CommodityRes();
         BeanUtils.copyProperties(commodity,commodityRes);
         commodityRes.setParamMap(paramGroupMap);
+        Brand brand = brandService.findById(commodity.getBrandId());
+        commodityRes.setBrandName(brand.getBrandName());
+        Long variantGroupId = commodity.getVariantGroupId();
+        List<ComVariant> variants = variantService.getVariantByGroupId(variantGroupId);
+        Map<Long, String> variantId2NameMap = variants.stream().collect(Collectors.toMap(v -> v.getId(), v -> v.getName()));
+        commodityRes.setVariantId2NameMap(variantId2NameMap);
+        commodityRes.setSkuRes(getSkuResList(id));
+        return commodityRes;
+    }
 
+
+    @Override
+    public Page<CommodityShortRes> getCommoditys(long pageNo, long size, String keyWord) {
+        Page<CommodityShortRes> commodityShortResPage = findCommoditys(pageNo, size, keyWord);
+        return commodityShortResPage;
     }
 
     @Override
-    public Page<Commodity> getCommoditys(long pageNo, long size, String keyWord) {
-        return null;
-    }
-
-    @Override
-    public Commodity updateCommodityPublishStatus(long id, PublishStatus publishStatus) {
-        return null;
+    public Commodity updateCommodityPublishStatus(long id, PublishStatus publishStatus) throws DataNotFoundException {
+        Commodity commodity = commodityMapper.selectById(id);
+        if(Objects.isNull(commodity)){
+            throw new DataNotFoundException();
+        }
+        commodity.setPublishStatus(publishStatus);
+        commodityMapper.updateById(commodity);
+        return commodity;
     }
 
     /**
@@ -127,14 +169,14 @@ public class CommodityServiceImpl implements CommodityService {
      */
     private void checkParamsValid(List<ParamItemDto> paramItemDtoList, long categoryId) throws ParamIllegalException, DataNotFoundException {
         List<CategoryParamGroupRelation> relations = categoryService.selectRelationByCategoryId(categoryId);
-        Set<ComParam> paramSet = new HashSet<>(relations.size() * 3);
+        Set<Long> paramIdSet = new HashSet<>(relations.size() * 3);
         for(CategoryParamGroupRelation relation : relations){
             Long paramGroupId = relation.getParamGroupId();
             List<ComParam> params = paramService.getParams(paramGroupId);
-            paramSet.addAll(params);
+            paramIdSet.addAll(params.stream().map(ComParam::getId).collect(Collectors.toList()));
         }
         for(ParamItemDto paramItemDto : paramItemDtoList){
-            if(!paramSet.contains(paramItemDto)){
+            if(!paramIdSet.contains(paramItemDto.getParamId())){
                 throw new ParamIllegalException("参数不存在");
             }
             ComParam comParam = paramService.selectParamById(paramItemDto.getParamId());
@@ -159,8 +201,18 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
+    /**
+     * 获取商品参数
+     * @param commodityId 商品id
+     * @param categoryId 分类id
+     * @return <pre class="code">{
+     * "属性组名1":{"属性名1":"XXX","属性名2":"BBB"},
+        "属性组名2":{"属性名1":"XXX","属性名2":"SSS"}
+    }</pre>
+     * @throws DataNotFoundException 数据不完整时抛出异常
+     */
     private Map<String,Map<String,String>> getParamGroupMap(long commodityId, long categoryId) throws DataNotFoundException {
-        List<CategoryParamGroupRelation> categoryParamGroupRelations = categoryService.selectRelationByCategoryId(commodity.getCategoryId());
+        List<CategoryParamGroupRelation> categoryParamGroupRelations = categoryService.selectRelationByCategoryId(categoryId);
         Map<String,Map<String ,String>> paramGroupMap = new HashMap<>();
         List<ComParamItem> paramItems = comParamItemMapper.selectByCommodityId(commodityId);
         Map<Long,String> itemMap = new HashMap<>();
@@ -182,5 +234,42 @@ public class CommodityServiceImpl implements CommodityService {
             paramGroupMap.put(groupName,paramMap);
         }
         return paramGroupMap;
+    }
+
+    /**
+     * @param commodityId 商品id
+     * @return 商品sku列表
+     */
+    private List<SkuRes> getSkuResList(long commodityId){
+        List<ComSKU> comSKUS = comSKUMapper.selectByMap(Map.of("commodity_id", commodityId));
+        return comSKUS.stream().map(sku -> {
+            SkuRes skuRes = new SkuRes();
+            BeanUtils.copyProperties(sku, skuRes);
+            Map<Long, String> variantId2ValueMap = new HashMap<>();
+            variantId2ValueMap.put(sku.getVariantId1(), sku.getVariantItem1());
+            variantId2ValueMap.put(sku.getVariantId2(), sku.getVariantItem2());
+            variantId2ValueMap.put(sku.getVariantId3(), sku.getVariantItem3());
+            skuRes.setVariantMap(variantId2ValueMap);
+            return skuRes;
+        }).collect(Collectors.toList());
+    }
+    private Page<CommodityShortRes> findCommoditys(long pageNo,long size,String keyword){
+        Page<Commodity> page = new Page<>();
+        page.setPages(pageNo);
+        page.setSize(size);
+        Page<Commodity> commodityPage = commodityMapper.getByPage(page, keyword);
+        List<Commodity> records = commodityPage.getRecords();
+        List<CommodityShortRes> commodityShortResList = records.stream().map(record -> {
+            CommodityShortRes commodityShortRes = new CommodityShortRes();
+            commodityShortRes.setId(record.getId());
+            commodityShortRes.setName(record.getName());
+            commodityShortRes.setImageUrl(record.getImageUrl());
+            commodityShortRes.setCategoryId(record.getCategoryId());
+            return commodityShortRes;
+        }).collect(Collectors.toList());
+        Page<CommodityShortRes> pageRes = new Page<>();
+        BeanUtils.copyProperties(page,pageRes);
+        pageRes.setRecords(commodityShortResList);
+        return pageRes;
     }
 }
