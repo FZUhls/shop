@@ -100,9 +100,14 @@ public class CommodityServiceImpl implements CommodityService {
         if(Objects.isNull(commodity)){
             throw new DataNotFoundException();
         }
+        //删除商品
         commodityMapper.deleteById(id);
+        //删除sku
         List<ComSKU> skus = comSKUMapper.selectByMap(Map.of("commodity_id", id));
         comSKUMapper.deleteBatchIds(skus.stream().map(ComSKU::getId).collect(Collectors.toList()));
+        //删除参数
+        List<ComParamItem> paramItems = comParamItemMapper.selectByCommodityId(id);
+        comParamItemMapper.deleteBatchIds(paramItems.stream().map(ComParamItem::getId).collect(Collectors.toList()));
     }
 
     @Override

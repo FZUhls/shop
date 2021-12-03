@@ -1,6 +1,7 @@
 package com.henry.shop.common.config.json;
 
 import cn.hutool.core.lang.ClassScanner;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.parser.DefaultJSONParser;
@@ -26,6 +27,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -55,6 +57,7 @@ public class JsonConfig implements WebMvcConfigurer {
             setEnumParser(aClass, parserConfig);
             setEnumSerializer(aClass, serializeConfig);
         });
+        setLongDeserializer(parserConfig);
         //配置生效
         FastJsonConfig config = converter.getFastJsonConfig();
         config.setSerializeConfig(serializeConfig);
@@ -85,6 +88,35 @@ public class JsonConfig implements WebMvcConfigurer {
                 out.write(enumerator.getCode().toString());
             } else {
                 out.writeEnum((Enum<?>) object);
+            }
+        });
+    }
+    private void setLongDeserializer(ParserConfig parserConfig){
+        parserConfig.putDeserializer(Long.class, new ObjectDeserializer() {
+            @Override
+            public <T> T deserialze(DefaultJSONParser defaultJSONParser, Type type, Object o) {
+                Object parse = defaultJSONParser.parse();
+                String string = parse.toString();
+                if(Objects.isNull(string)){
+                    log.error("JSON string = {}",string);
+                    throw new JSONException("不能将空字符串转化为Long类型");
+                }
+                log.info("接收到的字符串是---> {}",string);
+                string = string.replace("\"","");
+                string = string.replace("\'","");
+                log.info("replace后的字符串是---> {}",string);
+                if(!StrUtil.isNumeric(string)){
+                    log.error("JSON string = {}",string);
+                    throw new JSONException("不能将非数字的字符串转为Long类型");
+                }
+                T t = (T) Long.valueOf(string);
+                log.info("反序列化的结果是 : {}",t);
+                return t;
+            }
+
+            @Override
+            public int getFastMatchToken() {
+                return 0;
             }
         });
     }
