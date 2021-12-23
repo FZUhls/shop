@@ -7,6 +7,7 @@ import com.henry.shop.commodity.dto.req.CommodityUpdDto;
 import com.henry.shop.commodity.dto.req.SkuUpdDto;
 import com.henry.shop.commodity.dto.res.CommodityRes;
 import com.henry.shop.commodity.dto.res.CommodityShortRes;
+import com.henry.shop.commodity.dto.res.SkuRes;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.form.BaseResponse;
 import io.swagger.annotations.Api;
@@ -14,6 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Henry
@@ -30,6 +33,7 @@ public class CommodityController {
     private static final String DELETE = BASE + "/delete/{id}";
     private static final String SELETE = BASE + "/select/{id}";
     private static final String SEARCH_COMMODITY_BY_KEYWORD = BASE + "search-commodity";
+    private static final String SELECT_SKUS = BASE + "select-skus/{commodityId}";
 
     @Autowired
     CommodityRestService commodityRestService;
@@ -69,5 +73,11 @@ public class CommodityController {
     @ApiOperation("按关键字搜索商品")
     public BaseResponse<Page<CommodityShortRes>> searchCommodity(int pageNo, int size, String keyword){
         return commodityRestService.searchCommodity(pageNo,size,keyword);
+    }
+
+    @GetMapping(SELECT_SKUS)
+    @ApiOperation("按商品id查询对应sku列表")
+    BaseResponse<List<SkuRes>> selectSkusByCommodityId(@PathVariable("commodityId") long id){
+        return commodityRestService.selectSkusByCommodityId(id);
     }
 }

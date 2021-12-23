@@ -130,6 +130,15 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityRes;
     }
 
+    @Override
+    public List<SkuRes> selectSkusByCommodityId(long commodityId) throws DataNotFoundException {
+        Commodity commodity = commodityMapper.selectById(commodityId);
+        if(Objects.isNull(commodity)){
+            throw new DataNotFoundException();
+        }
+        return getSkuResList(commodityId);
+    }
+
 
     @Override
     public Page<CommodityShortRes> getCommoditys(long pageNo, long size, String keyWord) {
@@ -260,7 +269,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
     private Page<CommodityShortRes> findCommoditys(long pageNo,long size,String keyword){
         Page<Commodity> page = new Page<>();
-        page.setPages(pageNo);
+        page.setCurrent(pageNo);
         page.setSize(size);
         Page<Commodity> commodityPage = commodityMapper.getByPage(page, keyword);
         List<Commodity> records = commodityPage.getRecords();

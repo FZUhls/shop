@@ -29,6 +29,7 @@ public class SkuRes {
     /**
      * 规格列表
      */
+    @ApiModelProperty("规格序号和值对应表")
     private Map<Long,String> variantMap;
 
     /**

@@ -6,10 +6,13 @@ import com.henry.shop.commodity.dto.req.CommodityUpdDto;
 import com.henry.shop.commodity.dto.req.SkuUpdDto;
 import com.henry.shop.commodity.dto.res.CommodityRes;
 import com.henry.shop.commodity.dto.res.CommodityShortRes;
+import com.henry.shop.commodity.dto.res.SkuRes;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.form.BaseResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 商品service类
@@ -25,6 +28,7 @@ public interface CommodityRestService {
     String DELETE = BASE + "/delete/{id}";
     String SELETE = BASE + "/select/{id}";
     String SEARCH_COMMODITY_BY_KEYWORD = BASE + "search-commodity";
+    String SELECT_SKUS = BASE + "select-skus/{commodityId}";
 
     @GetMapping(SELETE)
     BaseResponse<CommodityRes> selectOne(@PathVariable("id") long id);
@@ -46,4 +50,7 @@ public interface CommodityRestService {
 
     @GetMapping(SEARCH_COMMODITY_BY_KEYWORD)
     BaseResponse<Page<CommodityShortRes>> searchCommodity(@RequestParam("pageNo") int pageNo, @RequestParam("size") int size, @RequestParam("keyword") String keyword);
+
+    @GetMapping(SELECT_SKUS)
+    BaseResponse<List<SkuRes>> selectSkusByCommodityId(@PathVariable("commodityId") long id);
 }

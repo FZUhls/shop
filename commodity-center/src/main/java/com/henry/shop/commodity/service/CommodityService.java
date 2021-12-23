@@ -6,11 +6,14 @@ import com.henry.shop.commodity.dto.req.CommodityUpdDto;
 import com.henry.shop.commodity.dto.req.SkuUpdDto;
 import com.henry.shop.commodity.dto.res.CommodityRes;
 import com.henry.shop.commodity.dto.res.CommodityShortRes;
+import com.henry.shop.commodity.dto.res.SkuRes;
 import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.exception.ParamIllegalException;
 import com.henry.shop.common.base.model.dataobj.com.Commodity;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 商品service
@@ -62,10 +65,17 @@ public interface CommodityService {
 
     /**
      * @param id 商品id
-     * @return 商品信息
+     * @return 商品信息(包括sku)
      * @throws DataNotFoundException 商品不存在时抛出
      */
     CommodityRes selectById(long id) throws DataNotFoundException;
+
+    /**
+     * @param commodityId 商品id
+     * @return 商品sku列表
+     * @throws DataNotFoundException 商品不存在时抛出
+     */
+    List<SkuRes> selectSkusByCommodityId(long commodityId) throws DataNotFoundException;
 
     /**
      * 分页获取商品

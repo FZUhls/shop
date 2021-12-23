@@ -19,3 +19,5 @@ swagger:
     name: henry
     url: https://blog.henrysy.cn/
     email: 314433307@qq.com
+logging:
+  config: classpath:logback-${spring.profiles.active}.xml

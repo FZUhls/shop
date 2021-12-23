@@ -101,10 +101,8 @@ public class JsonConfig implements WebMvcConfigurer {
                     log.error("JSON string = {}",string);
                     throw new JSONException("不能将空字符串转化为Long类型");
                 }
-                log.info("接收到的字符串是---> {}",string);
                 string = string.replace("\"","");
                 string = string.replace("\'","");
-                log.info("replace后的字符串是---> {}",string);
                 if(!StrUtil.isNumeric(string)){
                     log.error("JSON string = {}",string);
                     throw new JSONException("不能将非数字的字符串转为Long类型");

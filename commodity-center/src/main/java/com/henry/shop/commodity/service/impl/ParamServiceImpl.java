@@ -151,7 +151,7 @@ public class ParamServiceImpl implements ParamService {
     public Page<ComParamGroup> getParamGroups(long page, long size) {
         Page<ComParamGroup> groupPage = new Page<>();
         groupPage.setSize(size);
-        groupPage.setPages(page);
+        groupPage.setCurrent(page);
         Page<ComParamGroup> iPage = comParamGroupMapper.selectPage(groupPage, Wrappers.emptyWrapper());
         return iPage;
     }

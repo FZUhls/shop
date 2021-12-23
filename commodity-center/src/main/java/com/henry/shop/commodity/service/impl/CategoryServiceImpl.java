@@ -87,7 +87,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Page<Category> selectByPage(long pageNo, long size, String keyword) {
         Page<Category> page = new Page<>();
-        page.setPages(pageNo);
+        page.setCurrent(pageNo);
         page.setSize(size);
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         if(StrUtil.isNotBlank(keyword)){
