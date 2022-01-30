@@ -2,6 +2,8 @@ package com.henry.shop.common.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.henry.shop.common.base.constant.ShopLog;
+import com.henry.shop.common.base.enumerate.Code;
+import com.henry.shop.common.base.form.BaseResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,6 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Henry
@@ -24,10 +27,11 @@ import java.util.Map;
 @Component
 @Slf4j
 public class LogAop {
-    //声明切入点---仅对自定义的具有RestController注解的类的共有方法进行织入
+    /**
+     * 声明切入点---仅对自定义的具有RestController注解的类的共有方法进行织入
+     */
     @Pointcut("@target(org.springframework.web.bind.annotation.RestController) && within(com.henry.shop..*)")
     private void controllerPointcut(){
-
     }
     @Around("controllerPointcut()")
     public Object doLog(ProceedingJoinPoint pj) throws Throwable {
@@ -58,8 +62,13 @@ public class LogAop {
         shopLog.setHttpMethod(httpMethod);
         shopLog.setUrl(url);
         //执行方法
-        Object result = pj.proceed();
-        shopLog.setResult(result);
+        Object res = pj.proceed();
+        BaseResponse result = null;
+        if(res instanceof BaseResponse){
+            result = (BaseResponse) res;
+        }
+        shopLog.setCode(Optional.ofNullable(result).map(BaseResponse::getCode).map(Code::getCode).map(String::valueOf).orElse("NotDefined"));
+        shopLog.setMsg(Optional.ofNullable(result).map(BaseResponse::getMsg).orElse("empty"));
         //执行时间
         shopLog.setSpendTime(System.currentTimeMillis() - start);
         log.info(JSON.toJSONString(shopLog));

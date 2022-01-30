@@ -49,7 +49,9 @@ public class ShopLog {
     private Map<String,String []> parameter;
 
     /**
-     * 请求返回的结果
+     * 状态
      */
-    private Object result;
+    private String code;
+
+    private String msg;
 }
