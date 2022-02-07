@@ -1,6 +1,9 @@
 package com.henry.shop.common.base.enumerate;
 
+import com.alibaba.fastjson.annotation.JSONCreator;
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.henry.shop.common.base.annotation.EnumJson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,9 +28,11 @@ public enum ParamType implements Enumerator{
     INPUT(2,"输入");
 
     @EnumValue
+    @JsonValue
     private final Integer code;
     private final String label;
 
+    @JSONCreator
     public static ParamType getByCode(int code){
         for (ParamType paramType : values()){
            if(paramType.code == code){

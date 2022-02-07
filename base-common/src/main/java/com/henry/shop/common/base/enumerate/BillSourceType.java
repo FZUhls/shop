@@ -1,6 +1,8 @@
 package com.henry.shop.common.base.enumerate;
 
+import com.alibaba.fastjson.annotation.JSONCreator;
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,7 +26,21 @@ public enum BillSourceType implements Enumerator {
      */
     OUTLINE_SHOP(2,"线下门店");
 
+    @JSONCreator
+    public static BillSourceType getByCode(Integer code){
+        if(code == null){
+            return null;
+        }
+        for(BillSourceType items : values()){
+            if(items.code.equals(code)){
+                return items;
+            }
+        }
+        return null;
+    }
+
     @EnumValue
+    @JsonValue
     private final Integer code;
     private final String label;
 }

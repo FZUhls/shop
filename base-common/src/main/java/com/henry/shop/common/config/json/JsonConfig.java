@@ -17,7 +17,6 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.henry.shop.common.base.enumerate.Enumerator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -36,7 +35,7 @@ import java.util.Set;
  * @author Henry
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class JsonConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -48,7 +47,7 @@ public class JsonConfig implements WebMvcConfigurer {
         ParserConfig parserConfig = ParserConfig.getGlobalInstance();
         //以下几种类型解析时解析为string，避免精度丢失
         serializeConfig.put(BigInteger.class, ToStringSerializer.instance);
-        serializeConfig.put(Long.class, ToStringSerializer.instance);
+//        serializeConfig.put(Long.class, ToStringSerializer.instance);
         serializeConfig.put(BigDecimal.class, ToStringSerializer.instance);
         //获取枚举包下所有枚举类
         Set<Class<?>> enumTypes = getEnumTypes();

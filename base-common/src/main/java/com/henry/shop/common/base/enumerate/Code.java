@@ -1,6 +1,9 @@
 package com.henry.shop.common.base.enumerate;
 
+import com.alibaba.fastjson.annotation.JSONCreator;
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.henry.shop.common.base.annotation.EnumJson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,6 +27,20 @@ public enum Code implements Enumerator{
      */
     SYSTEM_ERROR(500,"请求错误");
 
+    @JSONCreator
+    public static Code getByCode(Integer code){
+        if(code == null){
+            return null;
+        }
+        for(Code items : values()){
+            if(items.code.equals(code)){
+                return items;
+            }
+        }
+        return null;
+    }
+
+    @EnumValue
     @JsonValue
     private final Integer code;
     private final String description;

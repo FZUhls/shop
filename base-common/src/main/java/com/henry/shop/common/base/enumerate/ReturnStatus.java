@@ -1,6 +1,8 @@
 package com.henry.shop.common.base.enumerate;
 
+import com.alibaba.fastjson.annotation.JSONCreator;
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -35,7 +37,22 @@ public enum ReturnStatus implements Enumerator{
      * 商家已拒绝退货
      */
     REFUSE(-1,"已拒绝");
+
+    @JSONCreator
+    public static ReturnStatus getByCode(Integer code){
+        if(code == null){
+            return null;
+        }
+        for(ReturnStatus items : values()){
+            if(items.code.equals(code)){
+                return items;
+            }
+        }
+        return null;
+    }
+
     @EnumValue
+    @JsonValue
     private final Integer code;
     private final String label;
 }

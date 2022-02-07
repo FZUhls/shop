@@ -48,7 +48,6 @@ public class LogAop {
         String methodName = method.getName();
         String ip = request.getRemoteAddr();
         String httpMethod = request.getMethod();
-        String url = request.getRequestURL().toString();
         //获取方法上的swagger注解
         ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
         //当存在apiOperation注解时，日志方法描述为注解的value，否则为空
@@ -60,7 +59,6 @@ public class LogAop {
         shopLog.setDescription(description);
         shopLog.setParameter(paramsMap);
         shopLog.setHttpMethod(httpMethod);
-        shopLog.setUrl(url);
         //执行方法
         Object res = pj.proceed();
         BaseResponse result = null;

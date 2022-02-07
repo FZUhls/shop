@@ -20,11 +20,6 @@ public class ShopLog {
     private Long spendTime;
 
     /**
-     * URL
-     */
-    private String url;
-
-    /**
      * 请求类型
      */
     private String httpMethod;
@@ -33,6 +28,7 @@ public class ShopLog {
      * controller类型名
      */
     private String className;
+
     /**
      * controller方法名
      */
