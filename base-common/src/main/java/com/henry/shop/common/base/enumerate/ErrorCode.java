@@ -3,7 +3,6 @@ package com.henry.shop.common.base.enumerate;
 import com.alibaba.fastjson.annotation.JSONCreator;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.henry.shop.common.base.annotation.EnumJson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
