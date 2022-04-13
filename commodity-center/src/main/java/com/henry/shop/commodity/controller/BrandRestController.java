@@ -7,6 +7,8 @@ import com.henry.shop.common.base.enumerate.Code;
 import com.henry.shop.common.base.exception.BaseException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.Brand;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
+@Api(tags = "品牌管理")
 public class BrandRestController {
     public static final String BASE_URL = "/commodity/brand";
     private static final String ADD_BRAND = BASE_URL + "/add-brand";
@@ -29,6 +32,7 @@ public class BrandRestController {
     BrandService brandService;
 
     @PostMapping(ADD_BRAND)
+    @ApiOperation(value = "添加品牌")
     public BaseResponse<Integer> addBrand(@RequestBody BrandDto brandVo){
         int count = brandService.addBrand(brandVo);
         BaseResponse<Integer> succ = BaseResponse.succ();
@@ -36,6 +40,7 @@ public class BrandRestController {
         return succ;
     }
     @GetMapping(SELECT_BRAND)
+    @ApiOperation("查询品牌")
     public BaseResponse<Page<Brand>> selectBrands(long pageNo, long size){
         Page<Brand> brandList = brandService.getBrandList(pageNo, size);
         BaseResponse<Page<Brand>> succ = BaseResponse.succ();
@@ -43,6 +48,7 @@ public class BrandRestController {
         return succ;
     }
     @GetMapping(SELECT_BRAND_BY_NAME)
+    @ApiOperation("关键字查询品牌")
     public BaseResponse<Page<Brand>> selectBrands(long pageNo, long size, String name){
         Page<Brand> brandList = brandService.findBrandByName(name,pageNo,size);
         BaseResponse<Page<Brand>> succ = BaseResponse.succ();
@@ -50,6 +56,7 @@ public class BrandRestController {
         return succ;
     }
     @GetMapping(SELECT_BY_ID)
+    @ApiOperation("根据id查询品牌")
     public BaseResponse<Brand> findById(@PathVariable("id") long id){
         try {
             Brand brand = brandService.findById(id);
@@ -65,6 +72,7 @@ public class BrandRestController {
         }
     }
     @PutMapping(UPDATE_BY_ID)
+    @ApiOperation("更新品牌")
     public BaseResponse<Integer> update(@PathVariable("id") long id,@RequestBody BrandDto brandDto){
         try {
             int count = brandService.update(id, brandDto);
@@ -79,6 +87,7 @@ public class BrandRestController {
         }
     }
     @DeleteMapping(DELETE_BY_ID)
+    @ApiOperation("根据id删除品牌")
     public BaseResponse delete(@PathVariable("id") long id){
         try {
             int delete = brandService.delete(id);

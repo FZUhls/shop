@@ -14,7 +14,7 @@ swagger:
   title: shop-customer-center
   description: 商品中心接口文档
   version: 1.0.0
-  basePackage: com.henry.shop.customer
+  basePackage: com.henry.shop.commodity.controller
   contact:
     name: henry
     url: https://blog.henrysy.cn/

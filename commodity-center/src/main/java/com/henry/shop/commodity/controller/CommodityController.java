@@ -13,6 +13,8 @@ import com.henry.shop.common.base.enumerate.PublishStatus;
 import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.exception.ParamIllegalException;
 import com.henry.shop.common.base.form.BaseResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@Api(tags = "商品管理")
 public class CommodityController {
 
     private static final String BASE = "/commodity";
@@ -40,6 +43,7 @@ public class CommodityController {
     private CommodityService commodityService;
 
     @GetMapping(SELETE)
+    @ApiOperation("根据id查询商品")
     public BaseResponse<CommodityRes> selectOne(@PathVariable("id") long id){
         try {
             CommodityRes commodityRes = commodityService.selectById(id);
@@ -54,6 +58,7 @@ public class CommodityController {
         }
     }
     @PostMapping(CREATE)
+    @ApiOperation("创建商品")
     public BaseResponse createCommodity(@RequestBody CommodityDto commodityDto){
         try {
             commodityService.createCommodity(commodityDto);
@@ -67,6 +72,7 @@ public class CommodityController {
         }
     }
     @DeleteMapping(DELETE)
+    @ApiOperation("删除商品")
     public BaseResponse deleteCommodity(@PathVariable("id") long id){
         try {
             commodityService.deleteCommodity(id);
@@ -80,6 +86,7 @@ public class CommodityController {
         }
     }
     @PutMapping(UPDATE_COMMODITY_STATUS)
+    @ApiOperation("更新商品状态")
     public BaseResponse updateCommodityStatus(@PathVariable("id") long id, PublishStatus publishStatus){
         try {
             commodityService.updateCommodityPublishStatus(id,publishStatus);
@@ -93,6 +100,7 @@ public class CommodityController {
         }
     }
     @PutMapping(UPDATE_COMMODITY)
+    @ApiOperation("更新商品")
     public BaseResponse updateCommodity(@PathVariable("id") long id, @RequestBody CommodityUpdDto commodityUpdDto){
         try {
             commodityService.updateCommodity(id,commodityUpdDto);
@@ -106,6 +114,7 @@ public class CommodityController {
         }
     }
     @PutMapping(UPDATE_SKU_LIST)
+    @ApiOperation("更新商品sku")
     public BaseResponse updateSkuList(@RequestBody SkuUpdDto skuUpdDto){
         commodityService.updateSku(skuUpdDto);
         BaseResponse response = BaseResponse.succ();
@@ -113,6 +122,7 @@ public class CommodityController {
     }
 
     @GetMapping(SEARCH_COMMODITY_BY_KEYWORD)
+    @ApiOperation("关键词分页搜索商品")
     public BaseResponse<Page<CommodityShortRes>> searchCommodity(int pageNo,int size,String keyword){
         Page<CommodityShortRes> commodityShortResPage = commodityService.getCommoditys(pageNo, size, keyword);
         BaseResponse succ = BaseResponse.succ();
@@ -121,6 +131,7 @@ public class CommodityController {
     }
 
     @GetMapping(SELECT_SKUS)
+    @ApiOperation("根据商品id获取商品sku")
     public BaseResponse<List<SkuRes>> selectSkuByCommodityId(@PathVariable("commodityId") long id){
         BaseResponse<List<SkuRes>> response = new BaseResponse<>();
         try {

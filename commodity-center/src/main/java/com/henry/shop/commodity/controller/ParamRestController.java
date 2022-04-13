@@ -8,6 +8,8 @@ import com.henry.shop.common.base.exception.DataNotFoundException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComParam;
 import com.henry.shop.common.base.model.dataobj.com.ComParamGroup;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api(tags = "商品参数管理")
 public class ParamRestController {
     private static final String BASE_URL = "/commodity/param";
     private static final String CREATE_PARAM_GROUP = BASE_URL + "/createParamGroup";
@@ -32,6 +35,7 @@ public class ParamRestController {
     @Autowired
     ParamService paramService;
     @PostMapping(CREATE_PARAM_GROUP)
+    @ApiOperation("创建参数组")
     public BaseResponse createParamGroup(@RequestBody ParamGroupDto paramGroupDto){
         int count = paramService.createParamGroup(paramGroupDto);
         BaseResponse succ = BaseResponse.succ();
@@ -39,6 +43,7 @@ public class ParamRestController {
         return succ;
     }
     @PostMapping(CREATE_PARAM)
+    @ApiOperation("创建参数")
     public BaseResponse createParam(@RequestBody ParamDto paramDto){
         try {
             paramService.addParamToGroup(paramDto);
@@ -52,6 +57,7 @@ public class ParamRestController {
         }
     }
     @PutMapping(UPDATE_PARAM_GROUP)
+    @ApiOperation("更新参数组")
     public BaseResponse updateParamGroup(@PathVariable("id") long id,@RequestBody ParamGroupDto paramGroupDto){
         try {
             paramService.editParamGroup(paramGroupDto);
@@ -65,6 +71,7 @@ public class ParamRestController {
         }
     }
     @PutMapping(UPDATE_PARAM)
+    @ApiOperation("更新参数")
     public BaseResponse updateParam(@PathVariable("id") long id,@RequestBody ParamDto paramDto){
         try {
             paramService.editParam(paramDto,id);
@@ -78,6 +85,7 @@ public class ParamRestController {
         }
     }
     @DeleteMapping(DELETE_PARAM_GROUP)
+    @ApiOperation("删除参数组")
     public BaseResponse deleteParamGroup(@PathVariable("id") long id){
         try {
             paramService.deleteParamGroup(id);
@@ -91,6 +99,7 @@ public class ParamRestController {
         }
     }
     @DeleteMapping(DELETE_PARAM)
+    @ApiOperation("删除参数")
     public BaseResponse deleteParam(@PathVariable("id") long id){
         try {
             paramService.deleteParam(id);
@@ -104,6 +113,7 @@ public class ParamRestController {
         }
     }
     @GetMapping(SELETE_PARAM_GROUPS)
+    @ApiOperation("分页查询参数组")
     public BaseResponse<Page<ComParamGroup>> getParamGroups(long page, long size){
         Page<ComParamGroup> paramGroups = paramService.getParamGroups(page, size);
         BaseResponse<Page<ComParamGroup>> response = BaseResponse.succ();
@@ -111,6 +121,7 @@ public class ParamRestController {
         return response;
     }
     @GetMapping(SELETE_PARAMS)
+    @ApiOperation("根据id获取参数组内参数")
     public BaseResponse<List<ComParam>> getParams(@PathVariable("groupId") long groupId){
         List<ComParam> params = paramService.getParams(groupId);
         BaseResponse<List<ComParam>> response = BaseResponse.succ();

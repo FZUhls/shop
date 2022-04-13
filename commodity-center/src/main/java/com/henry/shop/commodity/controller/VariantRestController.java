@@ -8,6 +8,8 @@ import com.henry.shop.common.base.exception.VariantException;
 import com.henry.shop.common.base.form.BaseResponse;
 import com.henry.shop.common.base.model.dataobj.com.ComVariant;
 import com.henry.shop.common.base.model.dataobj.com.ComVariantGroup;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@Api(tags = "规格管理")
 public class VariantRestController {
     @Autowired
     private VariantService variantService;
@@ -35,11 +38,13 @@ public class VariantRestController {
     private static final String DELETE = BASE_URL + "/delete/{id}";
     private static final String DELETE_GROUP = BASE_URL + "/deleteGroup/{id}";
     @PostMapping(CREATE_GROUP)
+    @ApiOperation("创建规格组")
     public BaseResponse createVariantGroup(@RequestBody VariantGroupDto variantGroupDto){
         variantService.createVariantGroup(variantGroupDto);
         return BaseResponse.succ();
     }
     @PostMapping(CREATE)
+    @ApiOperation("创建规格项")
     public BaseResponse createVariant(@RequestBody VariantDto variantDto){
         try {
             variantService.createVariant(variantDto);
@@ -52,6 +57,7 @@ public class VariantRestController {
         }
     }
     @GetMapping(FIND_VARIANT)
+    @ApiOperation("根据id查询规格")
     public BaseResponse<ComVariant> selectVariant(@PathVariable("id") long id){
         try {
             ComVariant variant = variantService.getVariantById(id);
@@ -71,6 +77,7 @@ public class VariantRestController {
      * @return 组内规格
      */
     @GetMapping(FIND_VARIANTS_IN_GROUP)
+    @ApiOperation("根据id获取规格组内规格")
     public BaseResponse<List<ComVariant>> selectVariantByGroupId(@PathVariable("groupId") long groupId){
         List<ComVariant> variants = variantService.getVariantByGroupId(groupId);
         BaseResponse succ = BaseResponse.succ();
@@ -79,6 +86,7 @@ public class VariantRestController {
     }
 
     @GetMapping(FIND_VARIANT_GROUP)
+    @ApiOperation("根据id获取规格组")
     public BaseResponse<ComVariantGroup> selectGroup(@PathVariable("id") long id){
         try {
             ComVariantGroup variantGroup = variantService.getVariantGroupById(id);
@@ -93,6 +101,7 @@ public class VariantRestController {
         }
     }
     @PutMapping(UPDATE_VARIANT)
+    @ApiOperation("更新规格")
     public BaseResponse<ComVariant> updateVariant(@PathVariable("id") long id, @RequestBody VariantDto variantDto){
         try {
             ComVariant variant = variantService.updateVariant(id, variantDto);
@@ -107,6 +116,7 @@ public class VariantRestController {
         }
     }
     @PutMapping(UPDATE_GROUP)
+    @ApiOperation("更新规格组")
     public BaseResponse<ComVariantGroup> updateGroup(@PathVariable("id") long id, @RequestBody VariantGroupDto variantGroupDto){
         try {
             ComVariantGroup variantGroup = variantService.updateVariantGroup(id, variantGroupDto);
@@ -121,6 +131,7 @@ public class VariantRestController {
         }
     }
     @DeleteMapping(DELETE)
+    @ApiOperation("删除规格")
     public BaseResponse delete(@PathVariable("id") long id){
         try {
             variantService.deleteVariant(id);
@@ -134,6 +145,7 @@ public class VariantRestController {
         }
     }
     @DeleteMapping(DELETE_GROUP)
+    @ApiOperation("删除规格组")
     public BaseResponse deleteGroup(@PathVariable("id") long id){
         try {
             variantService.deleteVariantGroup(id);
