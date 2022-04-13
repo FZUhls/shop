@@ -158,7 +158,7 @@
 
     <logger name="com.henry.shop.common.aop.LogAop" level="INFO" addtivity="false">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="LOG_STASH_RECORD"/>
+<!--        <appender-ref ref="LOG_STASH_RECORD"/>-->
     </logger>
 
 </configuration>
